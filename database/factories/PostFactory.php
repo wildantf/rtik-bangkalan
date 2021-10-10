@@ -27,7 +27,7 @@ class PostFactory extends Factory
             "publish_status"=>(mt_rand(0,1)),
             "excerpt"=>$this->faker->paragraph(mt_rand(1,3)),
             "body"=>$this->faker->paragraph(mt_rand(5,10)),
-            "user_id"=>mt_rand(1,5),
+            "user_id"=>mt_rand(1,3),
             "category_id"=>mt_rand(1,3)
         ];
     }

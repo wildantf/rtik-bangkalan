@@ -1,57 +1,9 @@
-{{-- @extends('dashboard.layouts.main')
-@section('container')
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">My Post</h1>
-    </div>
-
-    <a href="/dashboard/posts/create" class="btn btn-primary mb-3">Create new post</a>
-
-    @if (session()->has('success'))
-        <div class="alert alert-success col-lg-8" role="alert">
-            <p>{{ session('success') }}</p>
-        </div>
-    @endif
-
-    <div class="table-responsive col-lg-8">
-        <table class="table table-striped table-sm">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($posts as $post)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $post->title }}</td>
-                        <td>{{ $post->category->name }}</td>
-                        <td>
-                            <a href="/dashboard/posts/{{ $post->slug }}" class="badge bg-info"><span
-                                    data-feather="eye"></a>
-                            <a href="/dashboard/posts/{{ $post->slug }}/edit" class="badge bg-warning"><span
-                                    data-feather="edit"></a>
-                            <form action="/dashboard/posts/{{ $post->slug }}" method="POST" class="d-inline">
-                                @method('delete')
-                                @csrf
-                                <button class="badge bg-danger border-0 "
-                                    onclick="return confirm('Are you sure delete this post?')"><span
-                                        data-feather="x-circle"></button>
-                            </form>
-
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-@endsection --}}
-
 @extends('dashboard.layouts.main')
 @section('content')
 
+    @if (session()->has('success'))
+       <x-pop-alert type="success" message="{{session('success')}}"/>
+    @endif
     <!-- btn create post -->
     <a href="/dashboard/posts/create"
         class="py-2 px-4 inline-flex mb-4 items-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-md ">
@@ -90,7 +42,8 @@
 
                     <div
                         class="px-1 py-0.5 bg-opacity-90 rounded-md {{ $post->publish_status ? 'bg-green-500' : 'bg-red-500' }} tracking-widest title-font font-medium text-white">
-                        <span class="text-2xs md:text-xs uppercase font-bold">Unpublish</span>
+                        <span
+                            class="text-2xs md:text-xs uppercase font-bold">{{ $post->publish_status ? 'Published' : 'Unpublished' }}</span>
                     </div>
 
                 </div>

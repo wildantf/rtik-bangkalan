@@ -66,7 +66,7 @@ Route::prefix('dashboard')->group(function(){
     Route::get('/posts/checkSlug',[DashboardPostController::class, 'checkSlug']);
     // resource untuk posts
     Route::resource('/posts',DashboardPostController::class);
-    Route::get('/all-posts',[DashboardPostController::class, 'allPost']);
+    Route::get('/all-posts',[DashboardPostController::class, 'allPost'])->middleware(['permission:validation articles']);
     Route::resource('/categories',AdminCategoryController::class)->except('show');
     // set publish post status
     Route::put('/publish/{post:slug}',[DashboardPostController::class,'updatePublishStatus']);

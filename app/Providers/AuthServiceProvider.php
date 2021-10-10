@@ -14,10 +14,7 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
-        Post::class => PostPolicy::class,
-    ];
+
 
     /**
      * Register any authentication / authorization services.
@@ -28,6 +25,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+         // Implicitly grant "Super-Admin" role all permission checks using can()
+       Gate::before(function ($user, $ability) {
+        if ($user->hasRole('super-admin')) {
+            return true;
+        }
+    });
     }
 }

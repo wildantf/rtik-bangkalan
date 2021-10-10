@@ -3,13 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\Models\User;
 use App\Models\Category;
-use App\Models\Permission;
-use App\Models\Role;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
@@ -94,11 +90,16 @@ class DashboardPostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Post $post)
-    {
-        return view('dashboard.posts.edit', [
-            'post' => $post,
-            'categories' => Category::all(),
-        ]);
+    {   
+        // FIXME : perbaiki jika user memiliki permission validation, maka dapat mengedit artikel apapun
+        if(auth()->user()->id===$post->user_id ){
+            return view('dashboard.posts.edit', [
+                'post' => $post,
+                'categories' => Category::all(),
+            ]);
+        }else{
+            abort(403);
+        }
     }
 
     /**

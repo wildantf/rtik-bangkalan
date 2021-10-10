@@ -2,13 +2,13 @@
 
 namespace Database\Seeders;
 
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionRegistrar;
 use App\Models\Post;
-use App\Models\Role;
 use App\Models\User;
 use App\Models\Category;
-use App\Models\Permission;
 use Illuminate\Database\Seeder;
-
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -18,64 +18,77 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Role::create([
-            "name"=>"Super admin"]);
+        // Reset cached roles and permissions
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
+
+
+        // create permissions
+        Permission::create(['name' => 'create articles']); // menambahkan artikel (user,admin,super-admin)
+        Permission::create(['name' => 'edit articles']); // mengedit artikel (user,admin,super-admin)
+        Permission::create(['name' => 'validation articles']); //validasi artikel (admin,super-admin)
+        Permission::create(['name' => 'create category']); // menambahkan kategori (admin,super-admin)
+        Permission::create(['name' => 'set role']); // mengatur role user (super-admin)
+        Permission::create(['name' => 'delete user']); // menghapus user (super-admin)
         
-        Role::create([
-            "name"=>"Admin"]);
+        $role = Role::create(['name' => 'super-admin']);
+        $role->givePermissionTo(Permission::all());
         
-        Role::create([
-            "name"=>"User"]);
-
-
-        Permission::create([
-            "name"=>"Create Post"
-        ]);
-
-        Permission::create([
-            "name"=>"Update Post"
-        ]);
-        Permission::create([
-            "name"=>"Publish Post"
-        ]);
-        Permission::create([
-            "name"=>"Change User Role"
-        ]);
-        Permission::create([
-            "name"=>"Change Role Permission"
-        ]);
+        $role1 = Role::create(['name' => 'admin']);
+        $role1->givePermissionTo('create articles');
+        $role1->givePermissionTo('edit articles');
+        $role1->givePermissionTo('validation articles');
+        $role1->givePermissionTo('create category');
+        
+        $role2 = Role::create(['name' => 'user']);
+        $role2->givePermissionTo('create articles');
+        $role2->givePermissionTo('edit articles');
         
 
+        $user=User::create([
+            "name" => 'Wildan Tamma Faza Chair',
+            "username" => "wildantf",
+            "email" => 'wildantammafazachair877@gmail.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('password'),
 
-        User::create([
-                "name"=>'Wildan Tamma Faza Chair',
-                "username"=>"wildantf",
-                "email"=>'wildantammafazachair877@gmail.com',
-                'password'=>bcrypt('password'),
-                'is_admin'=>1,
-            ]);
+        ]);
+        $user->assignRole($role);
 
-            // User::create([
-        //     "name"=>'Abigail Ahza Gatan',
-        //     "email"=>'abigailahzagatan@gmail.com',
-        //     'password'=>bcrypt('12345'),
-        // ]);
-        User::factory(5)->create();
+        $user=User::create([
+            "name" => 'Abigail Ahza Gatan',
+            "username" => "abigail",
+            "email" => 'abigailahzagatan@gmail.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('password'),
+
+        ]);
+        $user->assignRole($role1);
+        
+        $user=User::create([
+            "name" => 'Muhammad Casildo',
+            "username" => "mcasildo",
+            "email" => 'casildo@gmail.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('password'),
+            
+        ]);
+        $user->assignRole($role2);
+
+        // User::factory(5)->create();
 
         Category::create([
-            "name"=>'Programing',
-            "slug"=>'programing',
+            "name" => 'Programing',
+            "slug" => 'programing',
         ]);
         Category::create([
-            "name"=>'Web Design',
-            "slug"=>'web-design',
+            "name" => 'Web Design',
+            "slug" => 'web-design',
         ]);
         Category::create([
-            "name"=>'Data Science',
-            "slug"=>'data-science',
+            "name" => 'Data Science',
+            "slug" => 'data-science',
         ]);
 
         Post::factory(20)->create();
-        
     }
 }
