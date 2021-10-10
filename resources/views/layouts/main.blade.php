@@ -6,20 +6,37 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    {{-- tailwind css --}}
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
+    {{-- <link href="/css/style.css" rel="stylesheet"> --}}
 
-    <title>WILDAN | {{ $title }}</title>
+
+    <title>@yield('title') | Relawan TIK Bangkalan </title>
+
+    {{-- <style>
+        .scroll-hidden::-webkit-scrollbar {
+           width: 0px;
+            background: transparent; /* make scrollbar transparent */
+ 
+        }
+        </style> --}}
 </head>
 
-<body>
-    @include('partials.navbar')
+<body class="bg-cyan-50 dark:bg-cyan-700" >
+    {{-- @include('partials.navbar') --}}
 
-    <div class="container mt-4">
-       @yield('container')
+    {{-- NAVBAR --}}
+    <x-navbar/>
+
+    <div class="mt-4">
+        <div class="mx-4 md:mx-18 lg:mx-20 xl:mx-28">
+            @yield('container')
+        </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    {{-- FOOTER --}}
+    <x-footer/>
 </body>
 
 </html>
