@@ -109,7 +109,7 @@ class DatabaseSeeder extends Seeder
         Category::create([
             "name" => 'Data Science',
             "slug" => 'data-science',
-            "color" => 'pink'
+            "color" => 'red'
         ]);
 
         Post::factory(20)->create();
