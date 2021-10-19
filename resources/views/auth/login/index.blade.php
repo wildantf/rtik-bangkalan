@@ -96,5 +96,9 @@
         </div>
     </div>
 
-    <script src="{{ asset('js/script.js') }}"> </script>
+    @production
+        <script src="{{ secure_asset('js/script.js') }}"> </script>
+    @else
+        <script src="{{ asset('js/script.js') }}"> </script>
+    @endproduction
 @endsection

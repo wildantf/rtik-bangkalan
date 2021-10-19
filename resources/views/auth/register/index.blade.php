@@ -15,7 +15,8 @@
                     @csrf
                     {{-- <img src="icon\logo%20RTIK%20Bangkalan.png" alt="" class="w-16 md:w-24 h-auto flex mx-auto"> --}}
 
-                    <p class="text-xl text-center text-gray-600 dark:text-gray-300 uppercase font-bold font-sans">Register</p>
+                    <p class="text-xl text-center text-gray-600 dark:text-gray-300 uppercase font-bold font-sans">Register
+                    </p>
 
                     <div class="flex flex-col lg:flex-row mt-8">
                         <div class="flex flex-col lg:mr-1">
@@ -51,8 +52,7 @@
 
 
                     <div class="mt-4">
-                        <label class="block mb-1 tracking-wide text-sm text-gray-600 dark:text-gray-200"
-                            for="email">Email
+                        <label class="block mb-1 tracking-wide text-sm text-gray-600 dark:text-gray-200" for="email">Email
                         </label>
                         <input id="email"
                             class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
@@ -113,5 +113,9 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('js/script.js') }}"> </script>
+    @production
+        <script src="{{ secure_asset('js/script.js') }}"> </script>
+    @else
+        <script src="{{ asset('js/script.js') }}"> </script>
+    @endproduction
 @endsection
