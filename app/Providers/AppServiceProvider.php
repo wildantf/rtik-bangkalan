@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,6 +32,9 @@ class AppServiceProvider extends ServiceProvider
         // Gate::define('admin',function(User $user){
         //     return $user->is_admin;
         // });
+        // if($this->app->environment('production')) {
+        //     URL::forceScheme('https');
+        //             }
 
         Model::preventLazyLoading(! $this->app->isProduction());
     }
