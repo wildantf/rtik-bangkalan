@@ -31,46 +31,50 @@
                                 d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                         </svg>
                         <span class="flex-1">
-                            My Post
+                            My Posts
                         </span>
-                        <span class="text-xs text-white bg-red-500 rounded-full px-1">
+                        {{-- <span class="text-xs text-white bg-red-500 rounded-full px-1">
                             +99
-                        </span>
+                        </span> --}}
                     </a>
                 </li>
 
-                @can('validation article')
-                    <div class="flex flex-wrap ml-5">
-                        <h6 class="mt-5 uppercase text-gray-400 font-bold text-xs dark:text-white">Administrator</h6>
-                    </div>
+                <div class="flex flex-wrap ml-5">
+                    <h6 class="mt-5 uppercase text-gray-400 font-bold text-xs dark:text-white">Administrator</h6>
+                </div>
 
-                    <li>
-                        <a href="/dashboard/all-posts"
-                            class="flex items-center px-4 py-2 space-x-2 font-bold text-cyan-800 dark:text-cyan-50 transition-colors duration-100  {{ Request::is('dashboard/all-posts') ? 'bg-cyan-50 dark:bg-cyan-800' : 'text-opacity-70 hover:text-opacity-100' }} rounded-lg hover:bg-cyan-50 dark:hover:bg-cyan-800">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
-                            </svg>
-                            <span class="flex-1">
-                                All Post
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="flex items-end px-4 py-2 space-x-2 font-bold text-cyan-800 dark:text-cyan-50 transition-colors duration-100 rounded-lg hover:bg-cyan-50 text-opacity-70 hover:text-opacity-100 dark:hover:bg-cyan-800">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                            </svg>
-                            <span class="flex-1">
-                                Category
-                            </span>
-                        </a>
-                    </li>
-                    <li>
+                @hasanyrole('super-admin|admin')
+                    @can('validation articles')
+                        <li>
+                            <a href="/dashboard/all-posts"
+                                class="flex items-center px-4 py-2 space-x-2 font-bold text-cyan-800 dark:text-cyan-50 transition-colors duration-100  {{ Request::is('dashboard/all-posts') ? 'bg-cyan-50 dark:bg-cyan-800' : 'text-opacity-70 hover:text-opacity-100' }} rounded-lg hover:bg-cyan-50 dark:hover:bg-cyan-800">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                                </svg>
+                                <span class="flex-1">
+                                    All Posts
+                                </span>
+                            </a>
+                        </li>
+                    @endcan
+                    @can('create category')
+                        <li>
+                            <a href="/dashboard/categories"
+                                class="flex items-end px-4 py-2 space-x-2 font-bold text-cyan-800 dark:text-cyan-50 transition-colors duration-100 {{ Request::is('dashboard/categories') ? 'bg-cyan-50 dark:bg-cyan-800' : 'text-opacity-70 hover:text-opacity-100' }} rounded-lg hover:bg-cyan-50 text-opacity-70 hover:text-opacity-100 dark:hover:bg-cyan-800">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                </svg>
+                                <span class="flex-1">
+                                    Categories
+                                </span>
+                            </a>
+                        </li>
+                    @endcan
+                    {{-- <li>
                         <a href="#"
                             class="flex items-end px-4 py-2 space-x-2 font-bold text-cyan-800 dark:text-cyan-50 transition-colors duration-100 rounded-lg hover:bg-cyan-50 text-opacity-70 hover:text-opacity-100 dark:hover:bg-cyan-800">
                             <svg class="w-6 h-6" viewBox="0 0 20 20" fill="none" stroke="currentColor"
@@ -83,24 +87,26 @@
                                 Settings
                             </span>
                         </a>
-                    </li>
-                @endcan
+                    </li> --}}
+
+                @endhasanyrole
             </ul>
         </nav>
     </div>
     <!--/ menu and logo -->
 
     <!-- profile link -->
-    <button
+    <div
         class="absolute left-0 flex-col items-center justify-center hidden w-full space-y-4 md:flex xl:w-auto xl:flex-row xl:justify-start xl:space-y-0 xl:space-x-2 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-60 xl:left-8 bottom-6">
-        <img src="{{ auth()->user()->image_profile ?? 'https://dummyimage.com/500x400' }}"
+        <img src="{{ isset(auth()->user()->photo_profile) ? asset('storage/' . auth()->user()->photo_profile) : 'https://dummyimage.com/500x400' }}"
             alt="{{ auth()->user()->name }}" class="rounded-full w-12 h-12">
         <div class="flex flex-col items-center text-sm xl:items-start">
             <span
-                class="font-bold text-cyan-900 dark:text-cyan-50">{{ \Illuminate\Support\Str::limit(auth()->user()->name, 17) }}</span>
-            <span class="text-sm font-bold text-cyan-800 opacity-50 dark:text-cyan-50">View profile</span>
+                class="font-bold text-cyan-900 dark:text-cyan-50 capitalize">{{ \Illuminate\Support\Str::limit(auth()->user()->name, 17) }}</span>
+            <a href="/profiles/{{ auth()->user()->username }}/edit"
+                class="text-sm font-bold text-cyan-800 opacity-50 dark:text-cyan-50">View profile</a>
         </div>
-    </button>
+    </div>
     <!--/ profile link -->
 
 </div>

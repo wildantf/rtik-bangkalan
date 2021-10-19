@@ -74,8 +74,9 @@
                     @endif
 
                     <div
-                        class="px-1 py-0.5 bg-opacity-90 rounded-md {{$post->publish_status? 'bg-green-500':'bg-red-500'  }} tracking-widest title-font font-medium text-white">
-                        <span class="text-2xs md:text-xs uppercase font-bold"> {{$post->publish_status? 'Published':'Unpublished'}} </span>
+                        class="px-1 py-0.5 bg-opacity-90 rounded-md {{ $post->publish_status ? 'bg-green-500' : 'bg-red-500' }} tracking-widest title-font font-medium text-white">
+                        <span class="text-2xs md:text-xs uppercase font-bold">
+                            {{ $post->publish_status ? 'Published' : 'Unpublished' }} </span>
                     </div>
 
                 </div>
@@ -84,16 +85,21 @@
 
             <div class="w-2/3 p-4 md:p-4">
                 <h1 class="text-2xl font-bold text-gray-800 dark:text-white">{{ $post->title }}</h1>
-                <h6 class="inline-flex text-xs text-white bg-sky-500 rounded-md px-1 py-0.5 dark:bg-gray-500"> {{ $post->category->name }}
+                <h6
+                    class="inline-flex text-xs text-white bg-sky-500 rounded-md px-1 py-0.5 dark:bg-{{ $post->category->color }}-500">
+                    {{ $post->category->name }}
                 </h6>
 
-                <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">{{ $post->excerpt }}</p>
+                <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">{{ \Illuminate\Support\Str::limit(strip_tags($post->excerpt), 120) }}</p>
 
                 <div class="flex justify-between flex-col sm:flex-row mt-3 item-center">
-                    <h6 class="flex items-center text-xs font-bold text-gray-700 dark:text-gray-200 md:text-sm"><span class="font-normal">{{$post->created_at->diffForHumans()}}&bull; </span>  By. {{ $post->author->name}}</h6> 
+                    <h6 class="flex items-center text-xs font-bold text-gray-700 dark:text-gray-200 md:text-sm">By.
+                        {{ $post->author->name }}&nbsp; &bull; &nbsp;
+                        <span class="font-normal">{{ $post->created_at->diffForHumans() }} </span>
+                    </h6>
 
                     <div class="flex justify-end mt-2 sm:mt-0">
-                        <a href="/dashboard/posts/{{ $post->slug }}"
+                        <a href="/dashboard/all-posts/{{ $post->slug }}"
                             class="inline-flex p-1 text-xs font-bold text-white uppercase transition-colors duration-200 transform bg-blue-500 rounded dark:bg-blue-700 hover:bg-blue-700 dark:hover:bg-blue-600 focus:outline-none focus:bg-blue-700 dark:focus:bg-blue-600">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                 fill="currentColor">
@@ -104,7 +110,7 @@
                             </svg>
                         </a>
 
-                        <a href="/dashboard/posts/{{ $post->slug }}/edit"
+                        <a href="/dashboard/all-posts/{{ $post->slug }}/edit"
                             class="mx-1 inline-flex p-1 text-xs font-bold text-white uppercase transition-colors duration-200 transform bg-yellow-500 rounded dark:bg-yellow-700 hover:bg-yellow-700 dark:hover:bg-yellow-600 focus:outline-none focus:bg-yellow-700 dark:focus:bg-yellow-600">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                 fill="currentColor">
@@ -131,5 +137,8 @@
             </div>
         </div>
     @endforeach
+    <div class="my-5">
+        {{ $posts->links() }}
+    </div>
     <!--/ post list -->
 @endsection

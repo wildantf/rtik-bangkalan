@@ -14,19 +14,22 @@ class PostController extends Controller
         // mengecek postingan sudah dapat izin publish atau belum
         $posts=Post::where('publish_status','1');
 
-        $title='';
+        $breadcrumb=collect([]);
 
         if(request('category')){
             $category=Category::firstWhere('slug',request('category'));
-            $title = ' in ' . $category->name;
+            $breadcrumb->put('Category',$category->name);
         }
         if (request('author')) {
             $author=User::firstWhere('username',request('author'));
-            $title= ' by ' . $author->name;
+            $breadcrumb->put('Author',$author->name);
+        }
+        if (request('search')){
+            $breadcrumb->put('Search',request('search'));
         }
 
         return view('posts', [
-            "title" => 'All Post'. $title,
+            "breadcrumb" => $breadcrumb,
             "posts" => $posts->latest()->filter(request(['search','category','author']))->paginate(7)->withQueryString(),
         ]);
     }
@@ -34,7 +37,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         return view('post', [
-            "title" => 'Single Post',
+            // "title" => 'Single Post',
             "post" => $post,
         ]);
     }

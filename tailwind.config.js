@@ -9,10 +9,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        sky:colors.sky,
-        cyan:colors.cyan,
-        rose:colors.rose,
-        Teal:colors.teal,
+        // sky: colors.sky,
+        cyan: colors.cyan,
+        // rose: colors.rose,
+        // Teal: colors.teal,
       },
       fontSize: {
         '2xs': '.6rem',
@@ -20,8 +20,10 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      opacity: ['disabled'],
+    },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms'),],
 }
 

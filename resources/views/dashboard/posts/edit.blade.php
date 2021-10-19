@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.main')
 @section('content')
     <section class=" p-6 mx-auto bg-white rounded-md shadow-sm dark:bg-gray-800">
-        <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Create Post</h2>
+        <h2 class="text-lg font-semibold text-gray-700 capitalize dark:text-white">Edit Post</h2>
 
         {{-- <div class="col-lg-8">
             <form method="POST" action="/dashboard/posts/{{ $post->slug }}" class="mb-5"
@@ -132,6 +132,7 @@
                                 <span id="text-upload">
                                     Upload Image
                                 </span>
+                                <input type="hidden" value="{{ $post->image }}" name="oldImage">
                                 <input type="file" name="image" id="image" class="hidden" onchange="imgPreview()"
                                     accept="image/x-png,image/gif,image/jpeg">
                                 @error('image')

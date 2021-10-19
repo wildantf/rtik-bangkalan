@@ -1,11 +1,15 @@
 <div class="flex justify-between w-full mx-auto max-w-screen-2xl">
     <div class="hidden md:block">
-        <h1 class="mb-1 text-2xl font-bold text-cyan-800 dark:text-cyan-50 @can('update', Model::class)
+        <h1
+            class="mb-1 text-2xl font-bold text-cyan-800 dark:text-cyan-50 @can('update', Model::class)
             
-        @endcan capitalize">Welcome <span class=" font-normal">{{ auth()->user()->name }}</span></h1>
-        <p class="hidden text-lg text-cyan-900 dark:text-cyan-50 lg:block"><span class="capitalize"> </span> overview</p>
+        @endcan capitalize">
+            Welcome <span class=" font-normal">{{ auth()->user()->name }}</span></h1>
+        {{-- <p class="hidden text-lg text-cyan-900 dark:text-cyan-50 lg:block">
+            {{  }} 
+        </p> --}}
     </div>
-    <div class="flex justify-between flex-1 space-x-4 md:justify-end">
+    {{-- <div class="flex justify-between flex-1 space-x-4 md:justify-end">
         <div class="relative w-full md:max-w-xs">
             <svg class="absolute w-5 h-5 text-cyan-900 top-3 left-3 opacity-70" fill="currentColor" viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg">
@@ -39,5 +43,5 @@
                     &nbsp;</div>
             </button>
         </div>
-    </div>
+    </div> --}}
 </div>

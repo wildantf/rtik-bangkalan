@@ -1,4 +1,7 @@
 @extends('layouts.main')
+@section('title')
+    Post
+@endsection
 
 @section('container')
 
@@ -27,26 +30,26 @@
             @endif
             <p class="mt-6 mb-2 text-xs font-semibold tracking-wider uppercase text-primary">{{ $post->category->name }}
             </p>
-            <h1 class="mb-3 text-3xl font-bold leading-tight text-gray-900 md:text-4xl capitalize" itemprop="headline"
+            <h1 class="mb-3 text-3xl font-bold leading-tight text-gray-900 dark:text-black md:text-4xl capitalize" itemprop="headline"
                 title="{{ $post->title }}">
                 {{ $post->title }}
             </h1>
             <div class="flex mb-6 space-x-2">
-                <a class="text-gray-900 bg-gray-100 badge hover:bg-gray-200 rounded-xl px-2" href="#">CSS</a>
-                <a class="text-gray-900 bg-gray-100 badge hover:bg-gray-200 rounded-xl px-2" href="#">Tailwind</a>
-                <a class="text-gray-900 bg-gray-100 badge hover:bg-gray-200 rounded-xl px-2" href="#">Ajax</a>
+                <a class="text-gray-900 dark:bg-gray-400 badge hover:bg-gray-200 rounded-xl px-2" href="#">CSS</a>
+                <a class="text-gray-900 dark:bg-gray-400 badge hover:bg-gray-200 rounded-xl px-2" href="#">Tailwind</a>
+                <a class="text-gray-900 dark:bg-gray-400 badge hover:bg-gray-200 rounded-xl px-2" href="#">Ajax</a>
             </div>
             <a class="flex items-center text-gray-700" href="#">
-                <div class="avatar "><img src="/img/wildan.jpg" alt="wildan"
+                <div class="avatar "><img src="{{isset($post->author->photo_profile) ? asset('storage/'. $post->author->photo_profile) : 'https://dummyimage.com/500x500'}}" alt="{{ $post->author->name }}"
                         class="object-fill h-10 w-10 rounded-full" /></div>
                 <div class="ml-2">
-                    <p class="text-sm font-semibold text-gray-800">{{ $post->author->name }}</p>
+                    <p class="text-sm font-semibold text-gray-800 dark:text-gray-300">{{ $post->author->name }}</p>
                     <p class="text-sm text-gray-500"> {{ $post->created_at->diffForHumans() }}</p>
                 </div>
             </a>
         </div>
 
-        <div class="w-full mx-auto pl-12 prose md:w-3/4 text-justify">
+        <div class="w-full mx-auto pl-12 prose md:w-3/4 text-justify dark:text-gray-200">
             <!-- AGAR TAGNYA TIDAK DI ESCAPE PHP -->
             {!! $post->body !!}
         </div>

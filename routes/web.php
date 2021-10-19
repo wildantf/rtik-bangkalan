@@ -8,8 +8,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\AdminPostController;
+use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\DashboardPostController;
+use App\Http\Controllers\DashboardCategoryController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -27,13 +30,26 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
     return view('home', [
-        "title" => 'Home',
     ]);
 });
 Route::get('/about', function () {
     return view('about', [
         'users'=>User::all(),
-        'title'=>'about',
+    ]);
+});
+Route::get('/team', function () {
+    return view('team', [
+        'users'=>User::all(),
+    ]);
+});
+Route::get('/schedule', function () {
+    return view('schedule', [
+        'users'=>User::all(),
+    ]);
+});
+Route::get('/article', function () {
+    return view('article', [
+        'users'=>User::all(),
     ]);
 });
 
@@ -44,7 +60,6 @@ Route::get('/posts/{post:slug}',[PostController::class, 'show']);
 // SELURUH KATEGORI
 Route::get('/categories',function(){
     return view('categories',[
-        'title'=> "Post Categories",
         'categories'=> Category::all(),
     ]);
 });
@@ -53,24 +68,33 @@ Route::get('/login',[LoginController::class,'index'])->name('login')->middleware
 Route::post('/login',[LoginController::class,'authenticate']);
 Route::post('/logout',[LoginController::class,'logout']);
 
-
-Route::get('/register',[RegisterController::class,'index'])->middleware('guest');
 // Route Register
+Route::get('/register',[RegisterController::class,'index'])->middleware('guest');
 Route::post('/register',[RegisterController::class,'store']);
 
+
+
+
 // DASHBOARD
-Route::prefix('dashboard')->group(function(){
+Route::middleware(['auth','verified'])->prefix('dashboard')->group(function(){
     Route::get('',function(){
-        return view('dashboard.index');})->middleware(['auth','verified']);
+        return view('dashboard.index');});
     // cek slug untuk mengetahui slug tidak ada dalam database atau tidak
     Route::get('/posts/checkSlug',[DashboardPostController::class, 'checkSlug']);
     // resource untuk posts
     Route::resource('/posts',DashboardPostController::class);
-    Route::get('/all-posts',[DashboardPostController::class, 'allPost'])->middleware(['permission:validation articles']);
-    Route::resource('/categories',AdminCategoryController::class)->except('show');
+
+    // ADMINISTRATOR
+    Route::resource('/all-posts',AdminPostController::class)->only(['edit','index'])->middleware(['permission:validation articles']);
     // set publish post status
-    Route::put('/publish/{post:slug}',[DashboardPostController::class,'updatePublishStatus']);
+    Route::put('/publish/{post:slug}',[AdminPostController::class,'updatePublishStatus']);
+    // Categories
+    Route::resource('/categories',AdminCategoryController::class)->except(['edit','show','create'])->middleware(['permission:create category']);
+    Route::get('/categories/checkSlug',[AdminCategoryController::class, 'checkSlug']);
 });
+
+
+
 
 
 Route::get('/email/verify', function () {
@@ -88,6 +112,14 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     $request->fulfill();
     return redirect('/');
 })->middleware(['auth', 'signed'])->name('verification.verify');
+
+// Profile
+// Route::middleware(['auth','verified'])->prefix('profile')->group(function(){
+    Route::resource('/profiles',UserProfileController::class)->middleware(['auth','verified']);
+// });
+
+
+
 // Route::get('/categories/{category:slug}',function(Category $category){
 //     return view('posts', [
 //         'title'=> "Post By Category : $category->name",

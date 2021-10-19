@@ -9,10 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     public function index(){
-        return view('login.index',[
-            'title'=> 'Login',
-            'active'=> 'Login',
-        ]);
+        return view('auth.login.index');
     }
 
     public function authenticate(Request $request){

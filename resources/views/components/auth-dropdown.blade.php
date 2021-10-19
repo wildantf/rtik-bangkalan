@@ -15,19 +15,20 @@
         id="dropdown-menu">
         <a href="#"
             class="flex items-center p-3 -mt-2 text-sm text-gray-600 transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-            <img class="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9"
-                src="https://images.unsplash.com/photo-1523779917675-b6ed3a42a561?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8d29tYW4lMjBibHVlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=face&w=500&q=200"
-                alt="jane avatar">
+            <img src="{{ isset(auth()->user()->photo_profile) ? asset('storage/' . auth()->user()->photo_profile) : 'https://dummyimage.com/500x400' }}"
+                alt="{{ auth()->user()->name }}" class="flex-shrink-0 object-cover mx-1 rounded-full w-9 h-9"
+                alt="{{ auth()->user()->name }}">
+
             <div class="mx-1 truncate">
                 <h1 class="text-sm font-semibold text-gray-700 dark:text-gray-200 truncate capitalize">
                     {{ $userName }}</h1>
-                <p class="text-sm text-gray-500 dark:text-gray-400 truncate">{{auth()->user()->email}}</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400 truncate">{{ auth()->user()->email }}</p>
             </div>
         </a>
 
         <hr class="border-gray-200 dark:border-gray-700 ">
 
-        <a href="#"
+        <a href="/profiles/{{ auth()->user()->username }}/edit"
             class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
             view profile
         </a>
@@ -55,10 +56,16 @@
 </div>
 
 <script>
-    const tgl_dropdown = document.querySelector('#toggle-dropdown');
-    const drop_menu = document.querySelector('#dropdown-menu');
+    // const tgl_dropdown = document.querySelector('#toggle-dropdown');
+    // const drop_menu = document.querySelector('#dropdown-menu');
 
-    tgl_dropdown.addEventListener("click", () => {
-        drop_menu.classList.toggle('hidden')
-    })
+    // tgl_dropdown.addEventListener("click", () => {
+    //     drop_menu.classList.toggle('hidden')
+    // })
+
+    $(document).ready(function() {
+        $('#toggle-dropdown').on('click', function() {
+            $('#dropdown-menu').fadeToggle(750);
+        });
+    });
 </script>

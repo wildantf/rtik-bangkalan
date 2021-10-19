@@ -5,6 +5,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <x-icon-tab/>
+
 
     {{-- Trix Editor --}}
     <link rel="stylesheet" type="text/css" href="/css/trix.css">
@@ -13,8 +15,12 @@
     {{-- tailwind css --}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    {{-- <link href="/css/style.css" rel="stylesheet"> --}}
 
+    {{-- JQUERY CDN --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    {{-- ALpine --}}
+    {{-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script> --}}
 
     <title>Dashboard | Relawan TIK Bangkalan</title>
 </head>

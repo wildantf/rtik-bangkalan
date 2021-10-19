@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
     public function index(){
-        return view('register.index',[
-            'title'=>'Register',
-        ]);
+        return view('auth.register.index');
     }
 
     public function store(Request $request){
@@ -26,16 +25,17 @@ class RegisterController extends Controller
         // Enskripsi password
         $validateData['password']=Hash::make($validateData['password']);
         // add default role user
-        $validateData['role_id']=3;
+
         // Create user
         $user= User::create($validateData);
 
+        $user->assignRole('user');
         
+        event(new Registered($user));
+        Auth::login($user);
+
         // flash message
         $request->session()->flash('registerSuccess','Registration successfull!');
-        
-        // FIXME: akun baru butuh diautentikasi ketika regis agar dapat masuk ke route verifikasi email
-        event(new Registered($user));
         return redirect('/email/verify');
         
     }

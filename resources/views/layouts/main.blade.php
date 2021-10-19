@@ -5,25 +5,24 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    
     {{-- tailwind css --}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    
-    {{-- <link href="/css/style.css" rel="stylesheet"> --}}
+    <x-icon-tab/>
 
+    {{-- JQUERY CDN --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+{{-- alpine js --}}
+    <script defer src="https://unpkg.com/alpinejs@3.4.2/dist/cdn.min.js"></script>
 
     <title>@yield('title') | Relawan TIK Bangkalan </title>
 
-    {{-- <style>
-        .scroll-hidden::-webkit-scrollbar {
-           width: 0px;
-            background: transparent; /* make scrollbar transparent */
- 
-        }
-        </style> --}}
+
+
 </head>
 
-<body class="bg-cyan-50 dark:bg-cyan-700" >
+<body class="bg-cyan-50 dark:bg-gray-800" >
     {{-- @include('partials.navbar') --}}
 
     {{-- NAVBAR --}}

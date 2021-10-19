@@ -1,5 +1,5 @@
-<div class="relative mt-16 bg-gradient-to-b from-cyan-400 to-cyan-500 dark:from-cyan-800 dark:to-cyan-900 ">
-    <svg class="absolute top-0 w-full h-6 -mt-5 sm:-mt-10 sm:h-16 text-cyan-400 dark:text-cyan-800 " preserveAspectRatio="none"
+<div class="relative mt-16 bg-gradient-to-b from-cyan-400 to-cyan-500 dark:from-gray-600 dark:to-gray-700 ">
+    <svg class="absolute top-0 w-full h-6 -mt-5 sm:-mt-10 sm:h-16 text-cyan-400 dark:text-gray-600 " preserveAspectRatio="none"
         viewBox="0 0 1440 54">
         <path fill="currentColor"
             d="M0 22L120 16.7C240 11 480 1.00001 720 0.700012C960 1.00001 1200 11 1320 16.7L1440 22V54H1320C1200 54 960 54 720 54C480 54 240 54 120 54H0V22Z">
@@ -9,14 +9,7 @@
         <div class="grid gap-16 row-gap-10 mb-8 lg:grid-cols-6">
             <div class="md:max-w-md lg:col-span-2">
                 <a href="/" aria-label="Go home" title="Company" class="inline-flex items-center">
-                    <svg class="w-8 text-teal-400" viewBox="0 0 24 24" stroke-linejoin="round" stroke-width="2"
-                        stroke-linecap="round" stroke-miterlimit="10" stroke="currentColor" fill="none">
-                        <rect x="3" y="1" width="7" height="12"></rect>
-                        <rect x="3" y="17" width="7" height="6"></rect>
-                        <rect x="14" y="1" width="7" height="6"></rect>
-                        <rect x="14" y="11" width="7" height="12"></rect>
-                    </svg>
-                    <span class="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase">Company</span>
+                    <img src="icon\logo%20horizontal.png" class="h-24 w-auto" alt="">
                 </a>
                 <div class="mt-4 lg:max-w-sm">
                     <p class="text-sm text-cyan-50">

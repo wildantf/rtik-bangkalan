@@ -2,7 +2,8 @@
 @section('content')
 
     @if (session()->has('success'))
-       <x-pop-alert type="success" message="{{session('success')}}"/>
+        <x-alert type="success"
+            message="<span class='font-bold text-gray-200'>{{ session('success')[0] }}</span>{{ session('success')[1] }}" />
     @endif
     <!-- btn create post -->
     <a href="/dashboard/posts/create"
@@ -16,7 +17,7 @@
         Create new post
     </a>
 
-    <!-- TODO: Tambahkan filter dan padding menggunakan jquery -->
+    <!-- TODO: Tambahkan filter search dan padding menggunakan jquery -->
 
     <!--/ btn create post -->
 
@@ -52,10 +53,12 @@
 
             <div class="w-2/3 p-4 md:p-4">
                 <h1 class="text-2xl font-bold text-gray-800 dark:text-white">{{ $post->title }}</h1>
-                <h6 class="inline-flex text-xs text-white bg-sky-500 rounded-md px-1 py-0.5"> {{ $post->category->name }}
+                <h6
+                    class="inline-flex text-xs text-white bg-sky-500 rounded-md px-1 py-0.5 dark:bg-{{ $post->category->color }}-500">
+                    {{ $post->category->name }}
                 </h6>
 
-                <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">{{ $post->excerpt }}</p>
+                <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">{{ \Illuminate\Support\Str::limit(strip_tags($post->excerpt), 120) }}</p>
 
                 <div class="flex justify-between mt-3 item-center">
                     <span

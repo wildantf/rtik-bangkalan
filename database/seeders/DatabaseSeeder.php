@@ -8,6 +8,7 @@ use Spatie\Permission\PermissionRegistrar;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Position;
 use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
@@ -18,6 +19,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+
+        Position::create(['name'=>'Ketua']);
+        Position::create(['name'=>'Wakil Ketua']);
+        Position::create(['name'=>'Sekretaris']);
+        Position::create(['name'=>'Wakil Sekretaris']);
+        Position::create(['name'=>'Bendahara']);
+        Position::create(['name'=>'Wakil Bendahara']);
+        Position::create(['name'=>'CO Kestari']);
+        Position::create(['name'=>'Kestari']);
+        Position::create(['name'=>'CO Humas']);
+        Position::create(['name'=>'Humas']);
+        Position::create(['name'=>'CO Literasi']);
+        Position::create(['name'=>'Literasi']);
+        Position::create(['name'=>'CO Litbang Aplikasi']);
+        Position::create(['name'=>'Litbang Aplikasi']);
+        Position::create(['name'=>'Nonstruktural']);
+
         // Reset cached roles and permissions
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
@@ -42,13 +61,14 @@ class DatabaseSeeder extends Seeder
         $role2 = Role::create(['name' => 'user']);
         $role2->givePermissionTo('create articles');
         $role2->givePermissionTo('edit articles');
-        
+
 
         $user=User::create([
             "name" => 'Wildan Tamma Faza Chair',
             "username" => "wildantf",
             "email" => 'wildantammafazachair877@gmail.com',
             'email_verified_at' => now(),
+            "position_id" =>1,
             'password' => bcrypt('password'),
 
         ]);
@@ -79,14 +99,17 @@ class DatabaseSeeder extends Seeder
         Category::create([
             "name" => 'Programing',
             "slug" => 'programing',
+            "color" => 'blue'
         ]);
         Category::create([
             "name" => 'Web Design',
             "slug" => 'web-design',
+            "color" => 'yellow'
         ]);
         Category::create([
             "name" => 'Data Science',
             "slug" => 'data-science',
+            "color" => 'pink'
         ]);
 
         Post::factory(20)->create();
