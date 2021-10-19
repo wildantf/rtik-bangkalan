@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -29,7 +30,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 
 Route::get('/', function () {
-    return view('home', [
+    return view('home', [ 
+        'posts' => Post::all()->take(4),
     ]);
 });
 Route::get('/about', function () {

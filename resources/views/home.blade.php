@@ -129,80 +129,28 @@
                     </section>
 
                     <section class="max-w-screen-xl py-5 mx-auto dark:bg-coolGray-800 dark:text-coolGray-100">
+                        <h1 class="border-b mb-2 py-1">LATEST POST</h1>
                         <div class="grid grid-cols-1 gap-5 lg:grid-cols-4 sm:grid-cols-2">
-                            <div class="relative flex items-end justify-start w-full text-left bg-center bg-cover h-96 dark:bg-coolGray-500"
-                                style="background-image: url(&quot;https://source.unsplash.com/random/240x320&quot;);">
-                                <div
-                                    class="absolute top-0 bottom-0 left-0 right-0 bg-gradient-to-b dark:via-transparent dark:from-coolGray-900 dark:to-coolGray-900">
-                                </div>
-                                <div class="absolute top-0 left-0 right-0 flex items-center justify-between mx-5 mt-3">
-                                    <a href="#"
-                                        class="px-3 py-2 text-xs font-semibold tracking-wider uppercase dark:text-coolGray-100 bgundefined">Politics</a>
-                                    <div class="flex flex-col justify-start text-center dark:text-coolGray-100">
-                                        <span class="text-3xl font-semibold leading-none tracking-wide">04</span>
-                                        <span class="leading-none uppercase">Aug</span>
+                            @foreach ($posts as $post)
+                                <div class="relative flex items-end justify-start w-full text-left bg-center bg-cover h-96 dark:bg-coolGray-500"
+                                    style="background-image: url({{ isset($post->image) ? asset('storage/' . $post->image) : 'https://dummyimage.com/200x400/d4d4d4/ffffff&text=Image+not+found' }});">
+                                    <div
+                                        class="absolute top-0 bottom-0 left-0 right-0 bg-gradient-to-b dark:via-transparent dark:from-coolGray-900 dark:to-coolGray-900">
                                     </div>
-                                </div>
-                                <h2 class="z-10 p-5">
-                                    <a href="#" class="font-medium text-md hover:underline dark:text-coolGray-100"> Autem
-                                        sunt tempora mollitia magnam non voluptates</a>
-                                </h2>
-                            </div>
-                            <div class="relative flex items-end justify-start w-full text-left bg-center bg-cover h-96 dark:bg-coolGray-500"
-                                style="background-image: url(&quot;https://source.unsplash.com/random/241x320&quot;);">
-                                <div
-                                    class="absolute top-0 bottom-0 left-0 right-0 bg-gradient-to-b dark:via-transparent dark:from-coolGray-900 dark:to-coolGray-900">
-                                </div>
-                                <div class="absolute top-0 left-0 right-0 flex items-center justify-between mx-5 mt-3">
-                                    <a href="#"
-                                        class="px-3 py-2 text-xs font-semibold tracking-wider uppercase dark:text-coolGray-100 bgundefined">Health</a>
-                                    <div class="flex flex-col justify-start text-center dark:text-coolGray-100">
-                                        <span class="text-3xl font-semibold leading-none tracking-wide">01</span>
-                                        <span class="leading-none uppercase">Aug</span>
+                                    <div class="absolute top-0 left-0 right-0 flex items-center justify-between mx-5 mt-3">
+                                        <a href="#"
+                                            class="px-3 py-2 text-xs font-semibold tracking-wider uppercase dark:text-coolGray-100 bgundefined">{{ $post->category->name }}</a>
+                                        <div class="flex flex-col justify-start text-center dark:text-coolGray-100">
+                                            <span class="text-3xl font-semibold leading-none tracking-wide">{{ $post->created_at->format('d') }}</span>
+                                            <span class="leading-none uppercase">{{ $post->created_at->format('M') }}</span>
+                                        </div>
                                     </div>
+                                    <h2 class="z-10 p-5">
+                                        <a href="#" class="font-medium text-md hover:underline dark:text-coolGray-100">
+                                            {{ $post->title }}</a>
+                                    </h2>
                                 </div>
-                                <h2 class="z-10 p-5">
-                                    <a href="#" class="font-medium text-md hover:underline dark:text-coolGray-100">Inventore
-                                        reiciendis aliquam excepturi</a>
-                                </h2>
-                            </div>
-                            <div class="relative flex items-end justify-start w-full text-left bg-center bg-cover h-96 dark:bg-coolGray-500"
-                                style="background-image: url(&quot;https://source.unsplash.com/random/242x320&quot;);">
-                                <div
-                                    class="absolute top-0 bottom-0 left-0 right-0 bg-gradient-to-b dark:via-transparent dark:from-coolGray-900 dark:to-coolGray-900">
-                                </div>
-                                <div class="absolute top-0 left-0 right-0 flex items-center justify-between mx-5 mt-3">
-                                    <a href="#"
-                                        class="px-3 py-2 text-xs font-semibold tracking-wider uppercase dark:text-coolGray-100 bgundefined">Science</a>
-                                    <div class="flex flex-col justify-start text-center dark:text-coolGray-100">
-                                        <span class="text-3xl font-semibold leading-none tracking-wide">28</span>
-                                        <span class="leading-none uppercase">Jul</span>
-                                    </div>
-                                </div>
-                                <h2 class="z-10 p-5">
-                                    <a href="#" class="font-medium text-md hover:underline dark:text-coolGray-100">Officiis
-                                        mollitia dignissimos commodi optio vero animi</a>
-                                </h2>
-                            </div>
-                            <div class="relative flex items-end justify-start w-full text-left bg-center bg-cover h-96 dark:bg-coolGray-500"
-                                style="background-image: url(&quot;https://source.unsplash.com/random/243x320&quot;);">
-                                <div
-                                    class="absolute top-0 bottom-0 left-0 right-0 bg-gradient-to-b dark:via-transparent dark:from-coolGray-900 dark:to-coolGray-900">
-                                </div>
-                                <div class="absolute top-0 left-0 right-0 flex items-center justify-between mx-5 mt-3">
-                                    <a href="#"
-                                        class="px-3 py-2 text-xs font-semibold tracking-wider uppercase dark:text-coolGray-100 bgundefined">Sports</a>
-                                    <div class="flex flex-col justify-start text-center dark:text-coolGray-100">
-                                        <span class="text-3xl font-semibold leading-none tracking-wide">19</span>
-                                        <span class="leading-none uppercase">Jul</span>
-                                    </div>
-                                </div>
-                                <h2 class="z-10 p-5">
-                                    <a href="#" class="font-medium text-md hover:underline dark:text-coolGray-100">Doloribus
-                                        sit illo necessitatibus architecto exercitationem enim</a>
-                                </h2>
-                            </div>
-                            <!---->
+                            @endforeach
                         </div>
                     </section>
 

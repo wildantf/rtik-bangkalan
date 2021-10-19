@@ -23,14 +23,8 @@
             </div>
         </div>
         <div>
-            @if ($post->image)
-                <div style="max-height:350px; overflow:hidden;" class="mt-3">
-                    <img src="{{ asset('storage/' . $post->image) }}" class="card-img-top" alt="...">
-                </div>
-            @else
-                <img src="https://source.unsplash.com/1200x400?{{ $post->category->slug }}" class="card-img-top"
-                    alt="..." class="mt-3">
-            @endif
+            <img src="{{ isset($post->image) ? asset('storage/' . $post->image) : 'https://dummyimage.com/1000x400/d4d4d4/ffffff&text=Image+not+found' }}"
+                class="h-auto w-full object-cover object-center" alt="{{ $post->category->slug }}">
             <!-- AGAR TAGNYA TIDAK DI ESCAPE PHP -->
             <article class="my-3 dark:text-gray-200">{!! $post->body !!}</article>
         </div>

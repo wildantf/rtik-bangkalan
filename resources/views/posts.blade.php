@@ -64,7 +64,7 @@
                             <a href="/posts?category={{ $posts[0]->category->slug }}"
                                 class="uppercase hover:text-white text-2xs md:text-xs text-uppercase">{{ $posts[0]->category->name }}</a>
                         </div>
-                        <img src="{{ isset($posts[0]->image) ? asset('storage/' . $posts[0]->image) : 'https://dummyimage.com/1200x400' }}"
+                        <img src="{{ isset($posts[0]->image) ? asset('storage/' . $posts[0]->image) : 'https://dummyimage.com/1000x400/b5b5b5/ffffff&text=Image+not+found' }}"
                             class="object-cover object-center h-full w-full" alt="{{ $posts[0]->title }}">
                         {{-- <img src="https://source.unsplash.com/1200x400?{{ $posts[0]->category->slug }}"
                             class="card-img-top" alt="{{ $posts[0]->category->slug }}"> --}}
@@ -127,7 +127,7 @@
                                         class="uppercase hover:text-white text-2xs md:text-xs text-uppercase m-2 absolute px-3 py-1 bg-opacity-70 rounded-md bg-{{ $post->category->color }}-500  tracking-widest title-font font-medium text-gray-200 mb-1 hover:bg-{{ $post->category->color }}-600 hover:shadow-lg py-2">{{ $post->category->name }}</a>
 
 
-                                <img src="{{ isset($post->image) ? asset('storage/' . $post->image) : 'https://dummyimage.com/700x400' }}"
+                                <img src="{{ isset($post->image) ? asset('storage/' . $post->image) : 'https://dummyimage.com/400x400/b5b5b5/ffffff&text=Image+not+found' }}"
                                     class="lg:h-48 md:h-36 w-full object-cover object-center"
                                     alt="{{ $post->category->slug }}">
 
