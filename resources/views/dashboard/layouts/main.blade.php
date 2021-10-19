@@ -13,7 +13,11 @@
     <script type="text/javascript" src="/js/trix.js"></script>
 
     {{-- tailwind css --}}
-    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+    @production
+        <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+    @else
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @endproduction
 
 
     {{-- JQUERY CDN --}}

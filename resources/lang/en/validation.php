@@ -140,6 +140,10 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+
+        'password_confirmation' => [
+            'same' => 'Password must match.',
+        ],
     ],
 
     /*

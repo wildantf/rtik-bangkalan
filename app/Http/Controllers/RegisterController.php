@@ -17,9 +17,10 @@ class RegisterController extends Controller
     public function store(Request $request){
         $validateData = $request->validate([
             'name'=> 'required|max:255',
-            'username'=>['required','min:3','max:25','unique:users'],
+            'username'=>'required|min:3|max:25|unique:users|regex:/^\S*$/u',
             'email'=>'required|email:dns|unique:users',
             'password'=>'required|min:8|max:20',
+            'password_confirmation' => 'required|min:8|same:password'
         ]);
 
         // Enskripsi password
@@ -34,9 +35,7 @@ class RegisterController extends Controller
         event(new Registered($user));
         Auth::login($user);
 
-        // flash message
-        $request->session()->flash('registerSuccess','Registration successfull!');
-        return redirect('/email/verify');
+        return redirect('/email/verify')->with('Success','Registration successfull!');
         
     }
 

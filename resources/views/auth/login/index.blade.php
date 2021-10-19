@@ -5,15 +5,15 @@
 
 @section('content')
     <div class="min-w-full">
-        <div class="max-w-md p-6 mx-auto bg-white rounded-xl bg-opacity-90 shadow-lg dark:bg-gray-800">
-            @if (session()->has('registerSuccess'))
+        <div class="max-w-md p-6 mx-auto bg-white rounded-xl shadow-lg dark:bg-gray-800">
+            @if (session()->has('Success'))
                 <div class="mb-4">
-                    <x-pop-alert type="success" message="{{ session('registerSuccess') }}" />
+                    <x-pop-alert type="success" message="{{ session('Success') }}" />
                 </div>
             @endif
-            @if (session()->has('loginError'))
+            @if (session()->has('Error'))
                 <div class="mb-4">
-                    <x-pop-alert type="error" message="{{ session('loginError') }}" />
+                    <x-pop-alert type="error" message="{{ session('Error') }}" />
                 </div>
             @endif
 
@@ -43,10 +43,12 @@
                     <input type="password" id="password"
                         class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                         name="password">
-                    <div class="flex items-center mt-2" >
+                    <div class="flex items-center mt-2">
                         <input id="show-password" name="show-password" type="checkbox" placeholder="Your password"
-                        class="form-checkbox h-4 w-4 focus:ring  focus:outline-none rounded-md text-blue-600 mr-1 cursor-pointer">
-                        <label for="show-password" class="cursor-pointer block ml-2 text-sm text-gray-800 dark:text-gray-200"> Show password </label>
+                            class="form-checkbox h-4 w-4 focus:ring  focus:outline-none rounded-md text-blue-600 mr-1 cursor-pointer">
+                        <label for="show-password"
+                            class="cursor-pointer block ml-2 text-sm text-gray-800 dark:text-gray-200"> Show password
+                        </label>
                     </div>
                 </div>
 
@@ -94,15 +96,5 @@
         </div>
     </div>
 
-    <script>
-        $(document).ready(function () {
-            $('#show-password').on('click', function () {
-                if($('#password').attr('type')=='password'){
-                    $('#password').attr('type','text');
-                }else{
-                    $('#password').attr('type','password');
-                }
-            });
-        });
-    </script>
+    <script src="{{ asset('js/script.js') }}"> </script>
 @endsection

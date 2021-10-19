@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.main')
 @section('content')
-    <!-- cards row -->
+    {{-- <!-- cards row -->
     <div class="grid grid-cols-1 gap-4 md:grid-cols-3 2xl:gap-8">
 
         <!-- monthly target -->
@@ -73,140 +73,43 @@
         <!--/ sales -->
 
     </div>
-    <!--/ cards row -->
+    <!--/ cards row --> --}}
 
-    <!-- recent orders -->
-    <div class="px-4 py-4 mt-8 bg-white rounded-md lg:px-8 lg:py-6">
-        <h2 class="mb-4 text-xl font-bold text-cyan-900 lg:mb-6">Recent orders</h2>
+    <!-- User -->
+    <div class="px-4 py-4 mt-8 bg-white dark:bg-gray-800 rounded-md lg:px-8 lg:py-6">
+        <h2 class="mb-4 text-xl font-bold text-cyan-900 lg:mb-6 dark:text-gray-200">User</h2>
         <div class="overflow-x-auto">
             <div class="inline-block min-w-full overflow-hidden align-middle">
                 <table class="min-w-full">
-                    <thead class="text-left bg-cyan-200">
+                    <thead class="text-center bg-cyan-200 dark:bg-cyan-800 dark:text-gray-200">
                         <tr>
-                            <th class="px-3 py-2">ID</th>
-                            <th class="px-3 py-2">Product</th>
-                            <th class="px-3 py-2">Customer</th>
+                            <th class="px-3 py-2">User</th>
+                            <th class="px-3 py-2">Contact</th>
                             <th class="px-3 py-2">Date</th>
-                            <th class="px-3 py-2">Status</th>
-                            <th class="px-3 py-2">&nbsp;</th>
+                            <th class="px-3 py-2">Role</th>
                         </tr>
                     </thead>
-                    <tbody class="text-cyan-900 divide-y divide-cyan-100 text-opacity-80 whitespace-nowrap">
-                        <tr>
-                            <td class="px-3 py-3">#12831</td>
-                            <td class="px-3 py-3">Traditional Package</td>
-                            <td class="px-3 py-3">Frances Nichols</td>
-                            <td class="px-3 py-3">12-01-2021</td>
-                            <td class="px-3 py-3">
-                                <span
-                                    class="inline-block w-16 px-3 py-1 text-xs text-center text-green-500 uppercase bg-green-100 rounded-full">Done</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="px-3 py-3">#12830</td>
-                            <td class="px-3 py-3">Pro Package</td>
-                            <td class="px-3 py-3">Ronald George</td>
-                            <td class="px-3 py-3">12-01-2021</td>
-                            <td class="px-3 py-3">
-                                <span
-                                    class="inline-block w-16 px-3 py-1 text-xs text-center text-green-500 uppercase bg-green-100 rounded-full">Done</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="px-3 py-3">#12829</td>
-                            <td class="px-3 py-3">Pro Package</td>
-                            <td class="px-3 py-3">Charlene Scott</td>
-                            <td class="px-3 py-3">12-01-2021</td>
-                            <td class="px-3 py-3">
-                                <span
-                                    class="inline-block w-16 px-3 py-1 text-xs text-center text-red-500 uppercase bg-red-100 rounded-full">Failed</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="px-3 py-3">#12828</td>
-                            <td class="px-3 py-3">Starter Package</td>
-                            <td class="px-3 py-3">Beverley Owens</td>
-                            <td class="px-3 py-3">11-01-2021</td>
-                            <td class="px-3 py-3">
-                                <span
-                                    class="inline-block w-16 px-3 py-1 text-xs text-center text-green-500 uppercase bg-green-100 rounded-full">Done</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="px-3 py-3">#12827</td>
-                            <td class="px-3 py-3">Pro Package</td>
-                            <td class="px-3 py-3">Julian Hansen</td>
-                            <td class="px-3 py-3">11-01-2021</td>
-                            <td class="px-3 py-3">
-                                <span
-                                    class="inline-block w-16 px-3 py-1 text-xs text-center text-yellow-500 uppercase bg-yellow-100 rounded-full">Hold</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="px-3 py-3">#12826</td>
-                            <td class="px-3 py-3">Pro Package</td>
-                            <td class="px-3 py-3">Nathan Howell</td>
-                            <td class="px-3 py-3">11-01-2021</td>
-                            <td class="px-3 py-3">
-                                <span
-                                    class="inline-block w-16 px-3 py-1 text-xs text-center text-green-500 uppercase bg-green-100 rounded-full">Done</span>
-                            </td>
-                        </tr>
+                    <tbody
+                        class="text-cyan-900 dark:text-gray-50 divide-y divide-cyan-100 text-opacity-80 whitespace-nowrap">
+                        @foreach ($users as $user)
+
+                            <tr>
+                                <td class="px-3 py-3">{{ $user->name }}</td>
+                                <td class="px-3 py-3">{{ $user->email }}</td>
+                                <td class="px-3 py-3">{{ $user->created_at->format('d/M/Y') }}</td>
+                                <td class="px-3 py-3 text-center">
+                                    <span
+                                        class="inline-block px-3 py-1 text-xs text-center text-green-500 uppercase bg-green-100 rounded-full">{{ $user->roles->pluck('name')[0];}}</span>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
         <a href="#" class="inline-block mt-5 font-bold text-cyan-600 hover:underline">View all
-            orders</a>
+            users</a>
     </div>
     <!--/ recent orders -->
 
-    <!-- post list -->
-    <div class="flex mx-auto overflow-hidden bg-white rounded-md mt-8 shadow-md dark:bg-gray-800">
-        <div class="w-1/3 bg-cover"
-            style="background-image: url('https://images.unsplash.com/photo-1494726161322-5360d4d0eeae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80')">
-        </div>
-
-        <div class="w-2/3 p-4 md:p-4">
-            <h1 class="text-2xl font-bold text-gray-800 dark:text-white">Backpack</h1>
-
-            <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">Lorem ipsum dolor sit amet
-                consectetur adipisicing elit In odit</p>
-
-            <div class="flex mt-2 item-center">
-                <svg class="w-5 h-5 text-gray-700 fill-current dark:text-gray-300" viewBox="0 0 24 24">
-                    <path
-                        d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
-                </svg>
-
-                <svg class="w-5 h-5 text-gray-700 fill-current dark:text-gray-300" viewBox="0 0 24 24">
-                    <path
-                        d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
-                </svg>
-
-                <svg class="w-5 h-5 text-gray-700 fill-current dark:text-gray-300" viewBox="0 0 24 24">
-                    <path
-                        d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
-                </svg>
-
-                <svg class="w-5 h-5 text-gray-500 fill-current" viewBox="0 0 24 24">
-                    <path
-                        d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
-                </svg>
-
-                <svg class="w-5 h-5 text-gray-500 fill-current" viewBox="0 0 24 24">
-                    <path
-                        d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
-                </svg>
-            </div>
-
-            <div class="flex justify-between mt-3 item-center">
-                <h1 class="text-lg font-bold text-gray-700 dark:text-gray-200 md:text-xl">$220</h1>
-                <button
-                    class="px-2 py-1 text-xs font-bold text-white uppercase transition-colors duration-200 transform bg-gray-800 rounded dark:bg-gray-700 hover:bg-gray-700 dark:hover:bg-gray-600 focus:outline-none focus:bg-gray-700 dark:focus:bg-gray-600">Add
-                    to Cart</button>
-            </div>
-        </div>
-    </div>
-    <!--/ post list -->
 @endsection

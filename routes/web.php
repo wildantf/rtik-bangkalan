@@ -31,7 +31,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
     return view('home', [ 
-        'posts' => Post::all()->take(4),
+        'posts' => Post::latest()->take(4)->get(),
     ]);
 });
 Route::get('/about', function () {
@@ -76,29 +76,6 @@ Route::post('/register',[RegisterController::class,'store']);
 
 
 
-
-// DASHBOARD
-Route::middleware(['auth','verified'])->prefix('dashboard')->group(function(){
-    Route::get('',function(){
-        return view('dashboard.index');});
-    // cek slug untuk mengetahui slug tidak ada dalam database atau tidak
-    Route::get('/posts/checkSlug',[DashboardPostController::class, 'checkSlug']);
-    // resource untuk posts
-    Route::resource('/posts',DashboardPostController::class);
-
-    // ADMINISTRATOR
-    Route::resource('/all-posts',AdminPostController::class)->only(['edit','index'])->middleware(['permission:validation articles']);
-    // set publish post status
-    Route::put('/publish/{post:slug}',[AdminPostController::class,'updatePublishStatus']);
-    // Categories
-    Route::resource('/categories',AdminCategoryController::class)->except(['edit','show','create'])->middleware(['permission:create category']);
-    Route::get('/categories/checkSlug',[AdminCategoryController::class, 'checkSlug']);
-});
-
-
-
-
-
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
@@ -119,6 +96,28 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 // Route::middleware(['auth','verified'])->prefix('profile')->group(function(){
     Route::resource('/profiles',UserProfileController::class)->middleware(['auth','verified']);
 // });
+
+
+// DASHBOARD
+Route::middleware(['auth','verified'])->prefix('dashboard')->group(function(){
+    Route::get('',function(){
+        return view('dashboard.index',[
+            'users' => User::with('roles')->get(),
+        ]);
+    });
+    // cek slug untuk mengetahui slug tidak ada dalam database atau tidak
+    Route::get('/posts/checkSlug',[DashboardPostController::class, 'checkSlug']);
+    // resource untuk posts
+    Route::resource('/posts',DashboardPostController::class);
+
+    // ADMINISTRATOR
+    Route::resource('/all-posts',AdminPostController::class)->only(['edit','index'])->middleware(['permission:validation articles']);
+    // set publish post status
+    Route::put('/publish/{post:slug}',[AdminPostController::class,'updatePublishStatus']);
+    // Categories
+    Route::resource('/categories',AdminCategoryController::class)->except(['edit','show','create'])->middleware(['permission:create category']);
+    Route::get('/categories/checkSlug',[AdminCategoryController::class, 'checkSlug']);
+});
 
 
 
