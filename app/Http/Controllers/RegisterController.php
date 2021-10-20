@@ -32,8 +32,8 @@ class RegisterController extends Controller
 
         $user->assignRole('user');
         
+        event(new Registered($user));
         Auth::login($user);
-        // event(new Registered($user));
 
         return redirect('/email/verify')->with('Success','Registration successfull!');
         
