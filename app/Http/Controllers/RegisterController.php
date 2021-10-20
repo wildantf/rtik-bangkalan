@@ -33,7 +33,7 @@ class RegisterController extends Controller
         $user->assignRole('user');
         
         Auth::login($user);
-        event(new Registered($user));
+        // event(new Registered($user));
 
         return redirect('/email/verify')->with('Success','Registration successfull!');
         
