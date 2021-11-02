@@ -157,7 +157,7 @@
             const slug = document.querySelector('#slug_' + categ_id);
 
             name.addEventListener('change', function() {
-                fetch('/dashboard/categories/checkSlug?name=' + name.value)
+                fetch('/dashboard/check-category-slug?name=' + name.value)
                     .then(response => response.json())
                     .then(data => slug.value = data.slug)
             });

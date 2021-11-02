@@ -50,7 +50,7 @@
                     <!-- TODO: Kasih drag and drop function-->
                     <div class="flex flex-col w-full h-full p-1 overflow-auto">
                         <div
-                            class="img-preview flex flex-col items-center justify-center py-12 text-base text-gray-500 transition duration-500 ease-in-out transform bg-white border border-dashed rounded-lg focus:border-blue-500 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 h-80">
+                            class="img-preview flex flex-col items-center justify-center py-12 text-base text-gray-500 transition duration-500 ease-in-out transform bg-white dark:bg-gray-900 bg-opacity-75 border border-dashed rounded-lg focus:border-blue-500 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 h-80">
 
                             <div class="bg-black bg-opacity-50 rounded-md">
                                 <p class="text-xs leading-7 px-2 py-0.5 text-white">
@@ -64,21 +64,19 @@
                                 </span>
                                 <input type="file" name="image" id="image" class="hidden" onchange="imgPreview()"
                                     accept="image/x-png,image/gif,image/jpeg">
-                                @error('image')
-                                    <div class="text-red text-xs">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-
                             </label>
+                            @error('image')
+                                <div class="text-red-600 text-xs">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
                     </div>
                 </div>
-
             </div>
 
 
-            <div class="pt-6 mb-3">
+            <div class="pt-6 mb-3 dark:text-gray-50">
                 <label for="body" class="text-gray-700 dark:text-gray-200">Body</label>
                 @error('body')
                     <p class="text-xs text-red-600">
@@ -104,7 +102,7 @@
         const slug = document.querySelector('#slug');
 
         title.addEventListener('change', function() {
-            fetch('/dashboard/posts/checkSlug?title=' + title.value)
+            fetch('/dashboard/check-post-slug?title=' + title.value)
                 .then(response => response.json())
                 .then(data => slug.value = data.slug)
         });

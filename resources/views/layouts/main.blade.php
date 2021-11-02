@@ -13,6 +13,7 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @endproduction
     <x-icon-tab />
+    <script src="{{ asset('js/theme.js') }}"></script>
 
     {{-- JQUERY CDN --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

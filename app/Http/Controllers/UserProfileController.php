@@ -50,8 +50,8 @@ class UserProfileController extends Controller
     public function show(User $profile)
     {
         // dd($profile);
-        return view('users.profile.show',[
-            "user"=>$profile,
+        return view('users.profile.show', [
+            "user" => $profile,
         ]);
     }
 
@@ -63,9 +63,13 @@ class UserProfileController extends Controller
      */
     public function edit(User $profile)
     {
-        return view('users.profile.edit',[
-            "user"=>$profile,
-        ]);
+        if (auth()->user()->username === $profile->username) {
+            return view('users.profile.edit', [
+                "user" => $profile,
+            ]);
+        } else {
+           return abort(403);
+        };
     }
 
     /**
@@ -78,8 +82,8 @@ class UserProfileController extends Controller
     public function update(Request $request, User $profile)
     {
         // dd($user->username);
-        $validateData= $request->validate([
-            'name'=> 'required|max:255',
+        $validateData = $request->validate([
+            'name' => 'required|max:255',
         ]);
 
         if ($request->file('image')) {
@@ -88,13 +92,13 @@ class UserProfileController extends Controller
             $validateData['photo_profile'] = $request->file('image')->store('photo-profile');
         }
 
-        $validateData['motto']=$request->motto;
-        $validateData['facebook_url']=$request->facebook;
-        $validateData['twitter_url']=$request->twitter;
-        $validateData['github_url']=$request->github;
+        $validateData['motto'] = $request->motto;
+        $validateData['facebook_url'] = $request->facebook;
+        $validateData['twitter_url'] = $request->twitter;
+        $validateData['github_url'] = $request->github;
 
         $profile->update($validateData);
-        return back()->with('success','User Berhasil diedit');
+        return back()->with('success', 'User Berhasil diedit');
     }
 
     /**

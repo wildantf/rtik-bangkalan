@@ -19,7 +19,7 @@
 
             <img src="icon\logo%20RTIK%20Bangkalan.png" alt="" class="w-16 md:w-24 h-auto flex mx-auto">
 
-            <form action="/login" method="POST" class="mt-6">
+            <form action="{{ route('login.auth') }}" method="POST" class="mt-6">
                 @csrf
                 <div>
                     <label for="email" class="block text-sm text-gray-800 dark:text-gray-200">Email</label>
@@ -91,7 +91,7 @@
             </a>
         </div> --}}
 
-            <p class="mt-8 text-xs font-light text-center text-gray-400"> Don't have an account? <a href="/register"
+            <p class="mt-8 text-xs font-light text-center text-gray-400"> Don't have an account? <a href="{{ route('register') }}"
                     class="font-medium text-gray-700 dark:text-gray-200 hover:underline">Register</a></p>
         </div>
     </div>

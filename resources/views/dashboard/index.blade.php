@@ -75,6 +75,70 @@
     </div>
     <!--/ cards row --> --}}
 
+    <!-- quick actions -->
+    <div
+        class="flex flex-col justify-center lg:justify-between px-4 py-4 mt-8 space-y-4 bg-white dark:bg-gray-800 rounded-lg lg:px-8 lg:py-6 lg:flex-row lg:space-y-0 lg:space-x-12">
+        <div>
+            <h2 class="mb-2 text-xl font-bold text-cyan-800 dark:text-blue-200">Quick actions</h2>
+            <p class="text-cyan-900 dark:text-gray-200 opacity-70">It's most used actions</p>
+        </div>
+        <nav class="space-y-2 md:flex md:space-x-4 md:space-y-0">
+            @can('delete user')
+                <a href="#"
+                    class="inline-flex flex-col items-center justify-center w-32 px-3 py-3 border border-cyan-300 dark:border-gray-600 rounded-lg hover:bg-cyan-100 dark:hover:bg-gray-700">
+                    <svg class="w-8 h-8 text-cyan-900 dark:text-gray-200" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11 6a3 3 0 11-6 0 3 3 0 016 0zM14 17a6 6 0 00-12 0h12zM13 8a1 1 0 100 2h4a1 1 0 100-2h-4z" />
+                    </svg>
+                    <span class="text-cyan-900 dark:text-gray-200 opacity-70">
+                        Delete User
+                    </span>
+                </a>
+            @endcan
+
+            <a href="{{ route('dashboard.posts.create') }}"
+                class="inline-flex flex-col items-center justify-center w-32 px-3 py-3 border border-cyan-300 dark:border-gray-600 rounded-lg hover:bg-cyan-100 dark:hover:bg-gray-700">
+                <svg class="w-8 h-8 text-cyan-900 dark:text-gray-200" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V8z"
+                        clip-rule="evenodd"></path>
+                </svg>
+                <span class="text-cyan-900 dark:text-gray-200 opacity-70">
+                    Create Post
+                </span>
+            </a>
+
+            <a href="{{ route('profiles.edit', auth()->user()->username) }}"
+                class="inline-flex flex-col items-center justify-center w-32 px-3 py-3 border border-cyan-300 dark:border-gray-600 rounded-lg hover:bg-cyan-100 dark:hover:bg-gray-700">
+                <svg class="w-8 h-8 text-cyan-900 dark:text-gray-200" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z">
+                    </path>
+                </svg>
+                <span class="text-cyan-900 dark:text-gray-200 opacity-70">
+                    Edit Profile
+                </span>
+            </a>
+
+            <a href="{{ route('dashboard.all-posts.index') }}"
+                class="inline-flex flex-col items-center justify-center w-32 px-3 py-3 border border-cyan-300 dark:border-gray-600 rounded-lg hover:bg-cyan-100 dark:hover:bg-gray-700">
+                <svg class="w-8 h-8 text-cyan-900 dark:text-gray-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                    fill="currentColor">
+                    <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                    <path fill-rule="evenodd"
+                        d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                        clip-rule="evenodd" />
+                </svg>
+                <span class="text-cyan-900 dark:text-gray-200 opacity-70">
+                    Edit Post
+                </span>
+            </a>
+        </nav>
+    </div>
+    <!--/ quick actions -->
+
     <!-- User -->
     <div class="px-4 py-4 mt-8 bg-white dark:bg-gray-800 rounded-md lg:px-8 lg:py-6">
         <h2 class="mb-4 text-xl font-bold text-cyan-900 lg:mb-6 dark:text-gray-200">User</h2>
@@ -85,7 +149,7 @@
                         <tr>
                             <th class="px-3 py-2">User</th>
                             <th class="px-3 py-2">Contact</th>
-                            <th class="px-3 py-2">Date</th>
+                            <th class="px-3 py-2">Join Date</th>
                             <th class="px-3 py-2">Role</th>
                         </tr>
                     </thead>
@@ -96,10 +160,10 @@
                             <tr>
                                 <td class="px-3 py-3">{{ $user->name }}</td>
                                 <td class="px-3 py-3">{{ $user->email }}</td>
-                                <td class="px-3 py-3">{{ $user->created_at->format('d/M/Y') }}</td>
+                                <td class="px-3 py-3 text-center">{{ $user->created_at->format('d/M/Y') }}</td>
                                 <td class="px-3 py-3 text-center">
                                     <span
-                                        class="inline-block px-3 py-1 text-xs text-center text-green-500 uppercase bg-green-100 rounded-full">{{ $user->roles->pluck('name')[0];}}</span>
+                                        class="inline-block px-3 py-1 text-xs text-center text-green-500 uppercase bg-green-100 rounded-full">{{ $user->roles->pluck('name')[0] }}</span>
                                 </td>
                             </tr>
                         @endforeach
@@ -107,9 +171,10 @@
                 </table>
             </div>
         </div>
-        <a href="#" class="inline-block mt-5 font-bold text-cyan-600 hover:underline">View all
-            users</a>
+        {{-- <a href="#" class="inline-block mt-5 font-bold text-cyan-600 hover:underline">View all
+            users</a> --}}
     </div>
     <!--/ recent orders -->
+
 
 @endsection

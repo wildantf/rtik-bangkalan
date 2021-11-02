@@ -11,7 +11,7 @@
                     <section class="grid gap-6 text-center lg:grid-cols-2 xl:grid-cols-5">
                         <div
                             class="w-full p-6 rounded-md sm:p-16 xl:col-span-2 bg-cyan-200 dark:bg-gray-700 bg-opacity-80 shadow-lg">
-                            <span class="block mb-2 dark:text-cyan-400">Apa Relawan TIK ?</span>
+                            <span class="block mb-2 dark:text-cyan-400">Apa itu Relawan TIK ?</span>
                             <h1 class="text-5xl font-extrabold dark:text-gray-50">Relawan TIK</h1>
                             <p class="my-8 font-normal text-justify">
                                 <span class="font-medium dark:text-gray-50 "> Organisasi Sosial kemasyarakatan </span> yang
@@ -22,14 +22,14 @@
                             </p>
 
                         </div>
-                        <img src="https://source.unsplash.com/random/480x360" alt=""
+                        <img src="https://drive.google.com/uc?id=1FboNFb5iCzd9Kd8W3E5StqHclvzDWEza" alt=""
                             class="object-cover w-full h-full rounded-md xl:col-span-3 dark:bg-gray-500">
                     </section>
                     <section>
                         <span
                             class="block mb-2 text-xs font-medium tracking-widest uppercase lg:text-center dark:text-cyan-400">How
                             it works</span>
-                        <h2 class="text-5xl font-bold lg:text-center dark:text-gray-50">Building with Mamba is simple
+                        <h2 class="text-5xl font-bold lg:text-center dark:text-gray-50"> Bagaimana menjadi Seorang relawan ?
                         </h2>
                         <div class="grid gap-6 my-16 lg:grid-cols-3">
                             <div
@@ -62,7 +62,7 @@
                         </div>
                     </section>
                     <section class="grid gap-6 lg:grid-cols-2">
-                        <img src="https://source.unsplash.com/random/360x480" alt=""
+                        <img src="https://drive.google.com/uc?id=1Hg5Nvwogze4tnfIC1MvbYs04cr-XNkFz" alt=""
                             class="object-cover w-full rounded-md max-h-96 dark:bg-gray-500">
                         <div
                             class="flex flex-col items-center w-full p-6 space-y-8 rounded-md lg:h-full lg:p-8 bg-cyan-200 dark:bg-gray-700 bg-opacity-80 shadow-lg">
@@ -98,7 +98,7 @@
                     <section>
                         <div class="grid gap-6 lg:grid-cols-3">
                             <div class="overflow-hidden rounded lg:flex lg:col-span-3">
-                                <img src="https://source.unsplash.com/random/485x365" alt=""
+                                <img src="https://drive.google.com/uc?id=1EOY5YjiWqhtkgUFztr7220vHdcA0oW5c" alt=""
                                     class="object-cover w-full h-auto max-h-96 dark:bg-gray-500">
                                 <div
                                     class="p-6 space-y-6 lg:p-8 md:flex md:flex-col bg-cyan-200 dark:bg-gray-700 bg-opacity-80 shadow-lg">
@@ -128,25 +128,25 @@
                         </div>
                     </section>
 
-                    <section class="max-w-screen-xl py-5 mx-auto dark:bg-coolGray-800 dark:text-coolGray-100">
+                    <section class="max-w-screen-xl py-5 mx-auto dark:bg-gray-800 dark:text-gray-100">
                         <h1 class="border-b mb-2 py-1">LATEST POST</h1>
                         <div class="grid grid-cols-1 gap-5 lg:grid-cols-4 sm:grid-cols-2">
                             @foreach ($posts as $post)
-                                <div class="relative flex items-end justify-start w-full text-left bg-center bg-cover h-96 dark:bg-coolGray-500"
+                                <div class="relative flex items-end justify-start w-full text-left bg-center bg-cover h-96 dark:bg-gray-500"
                                     style="background-image: url({{ isset($post->image) ? asset('storage/' . $post->image) : 'https://dummyimage.com/200x400/d4d4d4/ffffff&text=Image+not+found' }});">
                                     <div
-                                        class="absolute top-0 bottom-0 left-0 right-0 bg-gradient-to-b dark:via-transparent dark:from-coolGray-900 dark:to-coolGray-900">
+                                        class="absolute top-0 bottom-0 left-0 right-0 bg-gradient-to-b dark:via-transparent dark:from-gray-700 dark:to-gray-700">
                                     </div>
                                     <div class="absolute top-0 left-0 right-0 flex items-center justify-between mx-5 mt-3">
-                                        <a href="#"
-                                            class="px-3 py-2 text-xs font-semibold tracking-wider uppercase dark:text-coolGray-100 bgundefined">{{ $post->category->name }}</a>
-                                        <div class="flex flex-col justify-start text-center dark:text-coolGray-100">
+                                        <a href="{{ route('posts.index') . '?category=' . $post->category->slug }}"
+                                            class="px-3 py-2 text-xs font-semibold tracking-wider uppercase dark:text-gray-100 bgundefined">{{ $post->category->name }}</a>
+                                        <div class="flex flex-col justify-start text-center dark:text-gray-100">
                                             <span class="text-3xl font-semibold leading-none tracking-wide">{{ $post->created_at->format('d') }}</span>
                                             <span class="leading-none uppercase">{{ $post->created_at->format('M') }}</span>
                                         </div>
                                     </div>
                                     <h2 class="z-10 p-5">
-                                        <a href="#" class="font-medium text-md hover:underline dark:text-coolGray-100">
+                                        <a href="{{ route('posts.show', $post->slug) }}" class="font-medium text-md hover:underline dark:text-gray-100">
                                             {{ $post->title }}</a>
                                     </h2>
                                 </div>

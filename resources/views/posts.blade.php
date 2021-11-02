@@ -60,14 +60,12 @@
                 <div class="mx-auto">
                     <div class="rounded-t-lg h-96 overflow-hidden">
                         <div
-                            class="m-2 absolute px-2 py-1 bg-opacity-50 rounded-md bg-{{ $posts[0]->category->color }}-500 tracking-widest title-font font-medium text-gray-200 mb-1">
+                            class="m-2 absolute px-2 py-1 bg-opacity-70 hover:bg-opacity-100 rounded-md bg-{{ $posts[0]->category->color }}-500 tracking-widest title-font font-medium text-gray-200 mb-1">
                             <a href="/posts?category={{ $posts[0]->category->slug }}"
                                 class="uppercase hover:text-white text-2xs md:text-xs text-uppercase">{{ $posts[0]->category->name }}</a>
                         </div>
                         <img src="{{ isset($posts[0]->image) ? asset('storage/' . $posts[0]->image) : 'https://dummyimage.com/1000x400/b5b5b5/ffffff&text=Image+not+found' }}"
                             class="object-cover object-center h-full w-full" alt="{{ $posts[0]->title }}">
-                        {{-- <img src="https://source.unsplash.com/1200x400?{{ $posts[0]->category->slug }}"
-                            class="card-img-top" alt="{{ $posts[0]->category->slug }}"> --}}
                     </div>
                     <div class="flex flex-col md:flex-row m-5">
                         <div class="md:w-1/3 text-center md:pr-8 md:py-8">
@@ -96,8 +94,8 @@
                             class="md:w-2/3 md:pl-8 md:py-8 md:border-l border-gray-200 dark:border-gray-600 md:border-t-0 border-t mt-4 pt-4 md:mt-0 text-center md:text-justify">
                             <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
                                 {{ ucfirst(trans($posts[0]->title)) }}</h1>
-                            <p class="leading-relaxed text-lg mb-4 md:pr-2 text-gray-800 dark:text-gray-200">
-                                {{ strip_tags($posts[0]->body) }}</p>
+                            <p class="leading-relaxed text-lg mb-4 md:pr-2 text-gray-800 dark:text-gray-200 break-all">
+                                {{  \Illuminate\Support\Str::limit(strip_tags($posts[0]->body),190) }}</p>
 
                             <div class="flex justify-between items-center">
                                 <span class="text-gray-500 text-xs">{{ $posts[0]->created_at->diffForHumans() }}</span>
@@ -119,12 +117,12 @@
             <div class="py-6">
                 <div class="flex flex-wrap md:-m-2 xl:-m-3">
                     @foreach ($posts->skip(1) as $post)
-                        <div class="py-2 md:px-2 xl:px-3 md:w-1/3">
+                        <div class="w-full py-2 md:px-2 xl:px-3 md:w-1/3">
                             <div
                                 class=" h-full border shadow-lg dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-700">
                                 
                                     <a href="/posts?category={{ $post->category->slug }}"
-                                        class="uppercase hover:text-white text-2xs md:text-xs text-uppercase m-2 absolute px-3 py-1 bg-opacity-70 rounded-md bg-{{ $post->category->color }}-500  tracking-widest title-font font-medium text-gray-200 mb-1 hover:bg-{{ $post->category->color }}-600 hover:shadow-lg py-2">{{ $post->category->name }}</a>
+                                        class="uppercase hover:text-white text-2xs md:text-xs text-uppercase m-2 absolute px-3 py-1 bg-opacity-70 rounded-md bg-{{ $post->category->color }}-500  tracking-widest title-font font-medium text-gray-200 mb-1 hover:bg-opacity-100 hover:shadow-lg py-2">{{ $post->category->name }}</a>
 
 
                                 <img src="{{ isset($post->image) ? asset('storage/' . $post->image) : 'https://dummyimage.com/400x400/b5b5b5/ffffff&text=Image+not+found' }}"
@@ -143,11 +141,11 @@
                                 <div class="px-5 py-4 flex flex-col ">
                                     <div class="pb-2 border-b border-gray-100 dark:border-gray-600">
                                         <h1
-                                            class="title-font text-lg font-medium text-gray-900 dark:text-white mb-3 truncate">
+                                            class="title-font text-lg font-medium text-gray-900 dark:text-white mb-3 truncate break-all">
                                             {{ $post->title }}</h1>
 
                                         <!-- FIXME: ubah body menjadi excerpt atau hapus excerpt pada db-->
-                                        <p class="leading-snug mb-3 text-justify md:h-40 xl:h-24 dark:text-gray-50">
+                                        <p class="leading-snug mb-3 text-justify md:h-40 xl:h-24 dark:text-gray-50 break-all">
                                             {{ \Illuminate\Support\Str::limit(strip_tags($post->body), 190) }}</p>
                                         <div class="flex justify-between items-center flex-wrap mt-4">
                                             <span class="text-xs text-gray-400">

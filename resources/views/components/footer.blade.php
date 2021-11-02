@@ -1,14 +1,14 @@
 <div class="relative mt-16 bg-gradient-to-b from-cyan-400 to-cyan-500 dark:from-gray-600 dark:to-gray-700 ">
-    <svg class="absolute top-0 w-full h-6 -mt-5 sm:-mt-10 sm:h-16 text-cyan-400 dark:text-gray-600 " preserveAspectRatio="none"
-        viewBox="0 0 1440 54">
+    <svg class="absolute top-0 w-full h-6 -mt-5 sm:-mt-10 sm:h-16 text-cyan-400 dark:text-gray-600 "
+        preserveAspectRatio="none" viewBox="0 0 1440 54">
         <path fill="currentColor"
             d="M0 22L120 16.7C240 11 480 1.00001 720 0.700012C960 1.00001 1200 11 1320 16.7L1440 22V54H1320C1200 54 960 54 720 54C480 54 240 54 120 54H0V22Z">
         </path>
     </svg>
-    <div class="px-4 pt-12 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-4 lg:px-20">
+    <div class="px-4 pt-8 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-4 lg:px-20">
         <div class="grid gap-16 row-gap-10 mb-8 lg:grid-cols-6">
             <div class="md:max-w-md lg:col-span-2">
-                <a href="/" aria-label="Go home" title="Company" class="inline-flex items-center">
+                <a href="{{ route('home') }}" aria-label="Go home" title="Company" class="inline-flex items-center">
                     <img src="icon\logo%20horizontal.png" class="h-24 w-auto" alt="">
                 </a>
                 <div class="mt-4 lg:max-w-sm">
@@ -16,13 +16,9 @@
                         Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
                         laudantium, totam rem aperiam.
                     </p>
-                    <p class="mt-4 text-sm text-cyan-50">
-                        Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-                        explicabo.
-                    </p>
                 </div>
             </div>
-            <div class="grid grid-cols-2 gap-5 row-gap-8 lg:col-span-4 md:grid-cols-4">
+            <div class="grid grid-cols-2 gap-5 row-gap-8 lg:col-span-4 md:grid-cols-3">
                 <div>
                     <p class="font-semibold tracking-wide text-teal-accent-400">
                         Category
@@ -43,31 +39,6 @@
                         <li>
                             <a href="/"
                                 class="transition-colors duration-300 text-cyan-50 hover:text-teal-accent-400">References</a>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <p class="font-semibold tracking-wide text-teal-accent-400">Cherry</p>
-                    <ul class="mt-2 space-y-2">
-                        <li>
-                            <a href="/"
-                                class="transition-colors duration-300 text-cyan-50 hover:text-teal-accent-400">Web</a>
-                        </li>
-                        <li>
-                            <a href="/"
-                                class="transition-colors duration-300 text-cyan-50 hover:text-teal-accent-400">eCommerce</a>
-                        </li>
-                        <li>
-                            <a href="/"
-                                class="transition-colors duration-300 text-cyan-50 hover:text-teal-accent-400">Business</a>
-                        </li>
-                        <li>
-                            <a href="/"
-                                class="transition-colors duration-300 text-cyan-50 hover:text-teal-accent-400">Entertainment</a>
-                        </li>
-                        <li>
-                            <a href="/"
-                                class="transition-colors duration-300 text-cyan-50 hover:text-teal-accent-400">Portfolio</a>
                         </li>
                     </ul>
                 </div>
@@ -126,14 +97,16 @@
                 © Copyright 2021 Relawan TIK Bangkalan.
             </p>
             <div class="flex items-center mt-4 space-x-4 sm:mt-0">
-                <a href="https://www.linkedin.com/company/relawan-tik-bangkalan" class="transition-colors duration-300 text-cyan-100 hover:text-teal-accent-400">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5" viewBox="0 0 24 24" fill="currentColor">
+                <a href="https://www.linkedin.com/company/relawan-tik-bangkalan"
+                    class="transition-colors duration-300 text-cyan-100 hover:text-teal-accent-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5" viewBox="0 0 24 24"
+                        fill="currentColor">
                         <path
                             d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                     </svg>
                 </a>
                 <a href="/" class="transition-colors duration-300 text-cyan-100 hover:text-teal-accent-400">
-                    <svg viewBox="0 0 24 24" fill="currentColor" class="h-5" >
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="h-5">
                         <path
                             d="M24,4.6c-0.9,0.4-1.8,0.7-2.8,0.8c1-0.6,1.8-1.6,2.2-2.7c-1,0.6-2,1-3.1,1.2c-0.9-1-2.2-1.6-3.6-1.6 c-2.7,0-4.9,2.2-4.9,4.9c0,0.4,0,0.8,0.1,1.1C7.7,8.1,4.1,6.1,1.7,3.1C1.2,3.9,1,4.7,1,5.6c0,1.7,0.9,3.2,2.2,4.1 C2.4,9.7,1.6,9.5,1,9.1c0,0,0,0,0,0.1c0,2.4,1.7,4.4,3.9,4.8c-0.4,0.1-0.8,0.2-1.3,0.2c-0.3,0-0.6,0-0.9-0.1c0.6,2,2.4,3.4,4.6,3.4 c-1.7,1.3-3.8,2.1-6.1,2.1c-0.4,0-0.8,0-1.2-0.1c2.2,1.4,4.8,2.2,7.5,2.2c9.1,0,14-7.5,14-14c0-0.2,0-0.4,0-0.6 C22.5,6.4,23.3,5.5,24,4.6z">
                         </path>

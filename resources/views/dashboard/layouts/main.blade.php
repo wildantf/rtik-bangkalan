@@ -5,7 +5,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <x-icon-tab/>
+    @yield('csrf_token')
+    <x-icon-tab />
 
 
     {{-- Trix Editor --}}
@@ -18,13 +19,14 @@
     @else
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @endproduction
-
-
+    
     {{-- JQUERY CDN --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    {{-- ALpine --}}
-    {{-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script> --}}
+    <script src="{{ asset('js/theme.js') }}">
+    </script>
+
+
 
     <title>Dashboard | Relawan TIK Bangkalan</title>
 </head>
@@ -40,7 +42,8 @@
             <x-dashboard.sidebar />
             <!--/ sidebar -->
 
-            <div class="flex flex-col flex-1 px-4 py-4 overflow-hidden dark:bg-gray-700 bg-cyan-400 lg:py-8 lg:px-6 xl:px-8">
+            <div
+                class="flex flex-col flex-1 px-4 py-4 overflow-hidden dark:bg-gray-700 bg-cyan-400 lg:py-8 lg:px-6 xl:px-8">
 
                 <!-- topbar -->
                 <x-dashboard.topbar />

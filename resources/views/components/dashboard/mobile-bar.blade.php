@@ -7,7 +7,7 @@
         </svg>
     </button>
 
-    <a href="/" class="block -mr-8 dark:bg-white rounded-lg">
+    <a href="/" class="block -mr-8 dark:bg-gray-200 rounded-lg">
         <img src="/icon/logo%20horizontal.png" class="h-14 w-auto" alt="logo rtik bkl">
     </a>
 

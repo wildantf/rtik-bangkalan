@@ -1,51 +1,3 @@
-{{-- <nav class="shadow-sm">
-    <div class="bg-gradient-to-br from-cyan-300 to-cyan-400 dark:from-gray-600 dark:to-gray-700">
-        <div class="lg:mx-20 xl:mx-28">
-            <div class="flex flex-col md:flex-row ">
-                <div
-                    class="flex items-center justify-between pl-4 py-4 md:py-0 border-b border-cyan-200 dark:border-gray-300 md:border-b-0">
-                    <div class="inline-flex items-center">
-
-                        <a href="/"><img src="/icon/logo-rtik.png" class="h-10 w-auto" alt=""></a>
-                        <h1 class="md:hidden px-3 font-semibold text-white"> Relawan TIK Bangkalan</h1>
-                    </div>
-                    <div>
-                        <button class="text-white focus:outline-none block md:hidden mr-2" id="toggle-mobile-menu">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 6h16M4 12h16m-7 6h7" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="hidden md:flex md:justify-between w-full flex-col md:flex-row py-3 md:py-0"
-                    id="navbar-menu">
-                    <div class="flex flex-col md:flex-row font-semibold">
-                        <a href="/"
-                            class="block px-4 py-3 md:py-4 dark:border-gray-200 hover:text-white {{ Request::is('/') ? 'text-white md:border-b-2' : 'text-cyan-50' }} ">Home</a>
-                        <a href="/posts"
-                            class="block px-4 py-3 md:py-4 dark:border-gray-200 hover:text-white {{ Request::is('posts*') ? 'text-white md:border-b-2' : 'text-cyan-50' }}">Posts</a>
-                        <a href="/about"
-                            class="block px-4 py-3 md:py-4 dark:border-gray-200 hover:text-white {{ Request::is('about') ? 'text-white md:border-b-2' : 'text-cyan-50' }}">About</a>
-                        <a href="/about"
-                            class="block px-4 py-3 md:py-4 dark:border-gray-200 hover:text-white {{ Request::is('article') ? 'text-white md:border-b-2' : 'text-cyan-50' }}">Article</a>
-                    </div>
-                    <div class="flex flex-col md:flex-row">
-                        @auth
-                                                    <x-auth-dropdown user-name="{{ auth()->user()->name }}" />
-                        @else
-                                                    <a href="/login"
-                                                        class="block px-4 py-3 md:py-4  hover:text-white {{ Request::is('login') ? 'text-white' : 'text-cyan-50' }}">Login</a>
-                        @endauth
-
-                    </div> 
-                </div>
-            </div>
-        </div>
-    </div>
-</nav> --}}
-
 <div class="bg-gradient-to-br from-cyan-300 to-cyan-400 dark:from-gray-600 dark:to-gray-700 shadow-md">
     <div class="lg:mx-20 xl:mx-28">
         <div x-data="{ open: false }"
@@ -74,20 +26,20 @@
         </div>
         <nav :class="{'flex': open, 'hidden': !open}"
             class="flex-col items-center flex-grow pb-4 border-cyan-100  dark:border-cyan-500 md:pb-0 md:flex md:justify-end md:flex-row lg:border-l-2 lg:pl-2 flex">
-            <a class="px-4 py-2 mt-2 text-sm text-white dark:text-gray-300 md:mt-0  {{ Request::is('/') ? 'text-cyan-500 dark:text-cyan-500' : 'dark:text-gray-300' }} hover:text-cyan-500 focus:outline-none focus:shadow-outline"
-                href="/">Home</a>
-            <a class="px-4 py-2 mt-2 text-sm text-white dark:text-gray-300 md:mt-0  {{ Request::is('posts') ? ' text-cyan-500 dark:text-cyan-500' : 'dark:text-gray-300' }} hover:text-cyan-500 focus:outline-none focus:shadow-outline"
-                href="/posts">Posts</a>
-            <a class="px-4 py-2 mt-2 text-sm text-white dark:text-gray-300 md:mt-0  {{ Request::is('article') ? ' text-cyan-500 dark:text-cyan-500' : 'dark:text-gray-300' }} hover:text-cyan-500 focus:outline-none focus:shadow-outline"
-                href="/article">Article</a>
-            <a class="px-4 py-2 mt-2 text-sm text-white dark:text-gray-300 md:mt-0  {{ Request::is('schedule') ? ' text-cyan-500 dark:text-cyan-500' : 'dark:text-gray-300' }} hover:text-cyan-500 focus:outline-none focus:shadow-outline"
-                href="/schedule">Schedule</a>
-            <a class="px-4 py-2 mt-2 text-sm text-white dark:text-gray-300 md:mt-0  {{ Request::is('download') ? ' text-cyan-500 dark:text-cyan-500' : 'dark:text-gray-300' }} hover:text-cyan-500 focus:outline-none focus:shadow-outline"
-                href="#">Download</a>
-            <a class="px-4 py-2 mt-2 text-sm text-white dark:text-gray-300 md:mt-0  {{ Request::is('about') ? ' text-cyan-500 dark:text-cyan-500' : 'dark:text-gray-300' }} hover:text-cyan-500 focus:outline-none focus:shadow-outline"
-                href="/about">About</a>
-            <a class="px-4 py-2 mt-2 text-sm text-white dark:text-gray-300 md:mt-0  {{ Request::is('team') ? ' text-cyan-500 dark:text-cyan-500' : 'dark:text-gray-300' }} hover:text-cyan-500 focus:outline-none focus:shadow-outline"
-                href="/team">Team</a>
+            <a class="px-4 py-2 mt-2 text-sm text-white dark:text-gray-300 md:mt-0  {{ Request::routeIs('home') ? 'text-cyan-500 dark:text-cyan-500' : 'dark:text-gray-300' }} hover:text-cyan-500 focus:outline-none focus:shadow-outline"
+                href="{{ route('home') }}">Home</a>
+            <a class="px-4 py-2 mt-2 text-sm text-white dark:text-gray-300 md:mt-0  {{ Request::routeIs('posts.index') ? ' text-cyan-500 dark:text-cyan-500' : 'dark:text-gray-300' }} hover:text-cyan-500 focus:outline-none focus:shadow-outline"
+                href="{{ route('posts.index') }}">Posts</a>
+            {{-- <a class="px-4 py-2 mt-2 text-sm text-white dark:text-gray-300 md:mt-0  {{ Request::routeIs('article') ? ' text-cyan-500 dark:text-cyan-500' : 'dark:text-gray-300' }} hover:text-cyan-500 focus:outline-none focus:shadow-outline"
+                href="{{ route('article') }}">Article</a> --}}
+            <a class="px-4 py-2 mt-2 text-sm text-white dark:text-gray-300 md:mt-0  {{ Request::routeIs('schedule') ? ' text-cyan-500 dark:text-cyan-500' : 'dark:text-gray-300' }} hover:text-cyan-500 focus:outline-none focus:shadow-outline"
+                href="{{ route('schedule') }}">Schedule</a>
+            <a class="px-4 py-2 mt-2 text-sm text-white dark:text-gray-300 md:mt-0  {{ Request::routeIs('download') ? ' text-cyan-500 dark:text-cyan-500' : 'dark:text-gray-300' }} hover:text-cyan-500 focus:outline-none focus:shadow-outline"
+                href="https://drive.google.com/drive/folders/1CEZkekfctkzhUzP7wYa7MGh1YtRFgPsc">Download</a>
+            <a class="px-4 py-2 mt-2 text-sm text-white dark:text-gray-300 md:mt-0  {{ Request::routeIs('about') ? ' text-cyan-500 dark:text-cyan-500' : 'dark:text-gray-300' }} hover:text-cyan-500 focus:outline-none focus:shadow-outline"
+                href="{{ route('about') }}">About</a>
+            <a class="px-4 py-2 mt-2 text-sm text-white dark:text-gray-300 md:mt-0  {{ Request::routeIs('team') ? ' text-cyan-500 dark:text-cyan-500' : 'dark:text-gray-300' }} hover:text-cyan-500 focus:outline-none focus:shadow-outline"
+                href="{{ route('team') }}">Team</a>
 
 
             <div class="inline-flex items-center gap-2 list-none lg:ml-auto">
@@ -131,16 +83,16 @@
 
                                 <hr class="border-gray-200 dark:border-gray-500 ">
 
-                                <a href="/profiles/{{ auth()->user()->username }}/edit"
+                                {{-- <a href=""
                                     class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
                                     view profile
-                                </a>
+                                </a> --}}
 
-                                <a href="/dashboard"
+                                <a href="{{ route('dashboard.') }}"
                                     class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
                                     Dashboard
                                 </a>
-                                <a href="#"
+                                <a href="{{ route('profiles.edit',auth()->user()->username) }}"
                                     class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
                                     Settings
                                 </a>
@@ -148,7 +100,7 @@
                                 <form action="/logout" method="POST">
                                     @csrf
                                     {{-- <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i> Logout</button> --}}
-                                    <button href="#"
+                                    <button
                                         class="w-full flex flex-start px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
                                         type="submit">
                                         Log Out
@@ -158,10 +110,10 @@
                         </div>
                     </div>
                 @else
-                    <a href="/login"
+                    <a href="{{ route('login') }}"
                         class="items-center block px-6 py-1.5 text-base font-medium text-center text-cyan-500 transition duration-500 ease-in-out transform border-2 border-white dark:border-cyan-500 hover:border-cyan-600 hover:shadow-md shadow-md rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 hover:text-cyan-600">
                         Login </a>
-                    <a href="/register"
+                    <a href="{{ route('register') }}"
                         class="items-center block px-6 py-2 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-cyan-500 rounded-xl hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-600 hover:shadow-md" >
                         Register </a>
                 @endauth
@@ -171,14 +123,3 @@
     </div>
 </div>
 </div>
-<script>
-    // FIXME: ganti pake alpine
-    // $(document).ready(function() {
-    //     $('#toggle-mobile-menu').on('click', function() {
-    //         $('#navbar-menu').slideToggle(750);
-    //     })
-    //     if ($(window).width() >= 768) {
-    //         $('#navbar-menu').css('display', 'inline-flex')
-    //     }
-    // });
-</script>

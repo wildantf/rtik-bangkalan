@@ -11,7 +11,7 @@
 
 
             <div class="w-full px-6 py-8 md:px-8 lg:w-1/2">
-                <form action="/register" method="POST">
+                <form action="{{ route('register.auth') }}" method="POST">
                     @csrf
                     {{-- <img src="icon\logo%20RTIK%20Bangkalan.png" alt="" class="w-16 md:w-24 h-auto flex mx-auto"> --}}
 
@@ -101,7 +101,7 @@
                     </div>
 
                     <div class="flex items-center justify-between mt-8">
-                        <p class="flex w-1/2 text-xs font-light text-gray-400"> Already have account? <a href="/login"
+                        <p class="flex w-1/2 text-xs font-light text-gray-400"> Already have account? <a href="{{ route('login') }}"
                                 class="font-bold text-gray-700 dark:text-gray-200 hover:underline">&nbsp;Login</a></p>
                         <button
                             class=" w-1/3 px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-cyan-700 rounded-lg hover:bg-cyan-600 focus:outline-none focus:bg-cyan-600"
