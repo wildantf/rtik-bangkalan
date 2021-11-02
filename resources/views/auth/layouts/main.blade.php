@@ -27,7 +27,6 @@
     class="flex items-center bg-gradient-to-br min-h-screen from-cyan-400 to-cyan-300 dark:from-gray-600 dark:to-cyan-800 ">
 
     @yield('content')
-    <script src="{{ asset('js/toggle-theme.js') }}"></script>
 </body>
 
 </html>
