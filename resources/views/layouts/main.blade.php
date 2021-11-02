@@ -13,10 +13,12 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @endproduction
     <x-icon-tab />
-    <script src="{{ asset('js/theme.js') }}"></script>
 
     {{-- JQUERY CDN --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    {{-- THEME --}}
+    <script src="{{ asset('js/theme.js') }}"></script>
+
 
     {{-- alpine js --}}
     <script defer src="https://unpkg.com/alpinejs@3.4.2/dist/cdn.min.js"></script>
