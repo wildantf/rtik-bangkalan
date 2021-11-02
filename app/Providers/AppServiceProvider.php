@@ -35,9 +35,7 @@ class AppServiceProvider extends ServiceProvider
         // if($this->app->environment('production')) {
         //     URL::forceScheme('https');
         //             }
-        If (env('APP_ENV') !== 'local') {
-            $this->app['request']->server->set('HTTPS', true);
-        }
+
         Model::preventLazyLoading(! $this->app->isProduction());
     }
 }
