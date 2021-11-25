@@ -5,14 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UserProfileRequest;
 
 class UserProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         // return view('dashboard.categories.test',[
@@ -20,23 +17,12 @@ class UserProfileController extends Controller
         // ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(UserProfileRequest $request)
     {
         //
     }
@@ -55,58 +41,32 @@ class UserProfileController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function edit(User $profile)
     {
-        if (auth()->user()->username === $profile->username) {
-            return view('users.profile.edit', [
-                "user" => $profile,
-            ]);
-        } else {
-           return abort(403);
-        };
+        // abort respone jika bukan user
+        abort_if(auth()->user()->username !== $profile->username, 403,'Anda mau kemana hey');
+
+        return view('users.profile.edit', [
+            "user" => $profile,
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, User $profile)
+
+    public function update(UserProfileRequest $request, User $profile)
     {
         // dd($user->username);
-        $validateData = $request->validate([
-            'name' => 'required|max:255',
-        ]);
+        // TODO : HAK AKSES
+        $validatedData = $request->validated();
 
-        if ($request->file('image')) {
-            Storage::delete($request->oldImage);
+        if ($request->file('photo_profile')) {
+            Storage::delete($profile->photo_profile);
 
-            $validateData['photo_profile'] = $request->file('image')->store('photo-profile');
+            $validatedData['photo_profile'] = $request->file('photo_profile')->store('photo-profile');
         }
-
-        $validateData['motto'] = $request->motto;
-        $validateData['facebook_url'] = $request->facebook;
-        $validateData['twitter_url'] = $request->twitter;
-        $validateData['github_url'] = $request->github;
-
-        $profile->update($validateData);
+        $profile->update($validatedData);
         return back()->with('success', 'User Berhasil diedit');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(User $user)
     {
         //

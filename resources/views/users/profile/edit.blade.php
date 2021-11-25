@@ -35,7 +35,8 @@
                 </div>
             </div> --}}
             <div class="relative">
-                <img alt="profil" src="{{ isset($user->photo_profile)?asset('storage/' . $user->photo_profile) :'https://dummyimage.com/300x400'}}"
+                <img alt="profil"
+                    src="{{ isset($user->photo_profile) ? asset('storage/' . $user->photo_profile) : 'https://dummyimage.com/300x400' }}"
                     class="img-preview mx-auto object-cover rounded-full h-52 w-52" />
                 <label
                     class="absolute w-10 h-10 left-1/2 -bottom-4 transform -translate-x-1/2  bg-blue-500 rounded-full flex items-center cursor-pointer hover:bg-blue-600">
@@ -44,17 +45,16 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                     </svg>
-                    <input type="hidden" value="{{ $user->photo_profile }}" name="oldImage">
-                    <input type="file" name="image" id="image" class="hidden"
+                    <input type="file" name="photo_profile" id="image" class="hidden"
                         accept="image/x-png,image/gif,image/jpeg" onchange="imgPreview()">
-                    @error('image')
-                        <div class="text-red text-xs">
-                            {{ $message }}
-                        </div>
-                    @enderror
-
                 </label>
+
             </div>
+            @error('photo_profile')
+                <div class="flex justify-center items-center text-red-500 text-xs">
+                    {{ $message }}
+                </div>
+            @enderror
 
 
             <div class="flex flex-wrap mt-4 items-center">
@@ -84,10 +84,10 @@
 
                 <div class="w-full md:w-1/2 md:pl-2 md:py-4 py-2">
                     <label class="text-gray-700 dark:text-gray-200" for="slug">Facebook</label>
-                    <input id="facebook" name="facebook" type="text"
-                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                        value="{{ $user->facebook_url?? old('facebook') }}">
-                    @error('facebook')
+                    <input id="facebook" name="facebook_url" type="text"
+                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                        value="{{ $user->facebook_url ?? old('facebook_url') }}">
+                    @error('facebook_url')
                         <div class="text-xs text-red-600">
                             {{ $message }}
                         </div>
@@ -95,10 +95,10 @@
                 </div>
                 <div class="w-full md:w-1/2 md:pl-2 md:py-4 py-2">
                     <label class="text-gray-700 dark:text-gray-200" for="slug">Twitter</label>
-                    <input id="twitter" name="twitter" type="text"
-                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                        value="{{ $user->twitter_url ?? old('twitter') }}">
-                    @error('twitter')
+                    <input id="twitter" name="twitter_url" type="text"
+                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                        value="{{ $user->twitter_url ?? old('twitter_url') }}">
+                    @error('twitter_url')
                         <div class="text-xs text-red-600">
                             {{ $message }}
                         </div>
@@ -106,10 +106,10 @@
                 </div>
                 <div class="w-full md:w-1/2 md:pl-2 md:py-4 py-2">
                     <label class="text-gray-700 dark:text-gray-200" for="slug">Github</label>
-                    <input id="github" name="github" type="text"
-                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                        value="{{ $user->github_url ?? old('github') }}">
-                    @error('github')
+                    <input id="github" name="github_url" type="text"
+                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                        value="{{ $user->github_url ?? old('github_url') }}">
+                    @error('github_url')
                         <div class="text-xs text-red-600">
                             {{ $message }}
                         </div>
@@ -126,7 +126,7 @@
 
     </section>
     <script>
-         function imgPreview() {
+        function imgPreview() {
             const image = document.getElementById('image');
             const img_preview = document.querySelector('.img-preview');
 
@@ -134,7 +134,7 @@
             oFReader.readAsDataURL(image.files[0]);
 
             oFReader.onload = function(oFREvent) {
-                img_preview.src = oFREvent.target.result ;
+                img_preview.src = oFREvent.target.result;
                 // console.log(oFREvent.target.result);
             };
 

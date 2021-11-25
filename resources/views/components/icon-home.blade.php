@@ -1,0 +1,1 @@
+<img src="{{ asset( '/icon/logo-rtik.png' )}}" alt="log rtik bangkalan" {{$attributes->merge(['class'=>'h-10 w-auto']) }}>

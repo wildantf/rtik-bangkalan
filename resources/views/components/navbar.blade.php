@@ -4,7 +4,7 @@
             class="flex flex-col max-w-screen-xl px-2 py-3 mx-auto md:items-center md:justify-between md:flex-row ">
             <div class="flex flex-row items-center justify-between lg:justify-start">
                 <a href="/">
-                    <img src="/icon/logo-rtik.png" class="h-10 w-auto pl-1 lg:pl-0 lg:pr-2" alt="">
+                    <x-icon-home class="pl-1 lg:pl-0 lg:pr-2"/>
                     <div class="text-cyan-50 transition duration-500 ease-in-out transform tracking-relaxed lg:pr-4">
                         <h1
                             class="text-gray-700 tracking-wide font-sans text-center font-bold text-base dark:text-gray-100">
