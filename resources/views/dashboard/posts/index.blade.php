@@ -88,10 +88,13 @@ if (Request::is('dashboard/all-posts')) {
 
             <div class="w-2/3 p-4 md:p-4">
                 <h1 class="text-2xl font-bold text-gray-800 dark:text-white">{{ $post->title }}</h1>
-                <h6
-                    class="inline-flex text-xs text-white bg-sky-500 rounded-md px-1 py-0.5 bg-{{ $post->category->color }}-500">
-                    {{ $post->category->name }}
-                </h6>
+                
+                @isset($post->category_id)
+                    <h6
+                        class="inline-flex text-xs text-white bg-sky-500 rounded-md px-1 py-0.5 bg-{{ $post->category->color }}-500">
+                        {{ $post->category->name }}
+                    </h6>
+                @endisset
 
                 <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
                     {{ \Illuminate\Support\Str::limit(strip_tags($post->excerpt), 120) }}</p>
@@ -107,7 +110,7 @@ if (Request::is('dashboard/all-posts')) {
                     </div>
 
                     <div>
-                        <a href="{{ Request::routeIs('dashboard.all-posts.index') ?? Request::routeIs('dashboard.posts.index') ? route('dashboard.all-posts.show',$post->slug) : route('dashboard.posts.show',$post->slug)}}"
+                        <a href="{{ Request::routeIs('dashboard.all-posts.index') ?? Request::routeIs('dashboard.posts.index') ? route('dashboard.all-posts.show', $post->slug) : route('dashboard.posts.show', $post->slug) }}"
                             class="inline-flex p-1 text-xs font-bold text-white uppercase transition-colors duration-200 transform bg-blue-500 rounded dark:bg-blue-700 hover:bg-blue-700 dark:hover:bg-blue-600 focus:outline-none focus:bg-blue-700 dark:focus:bg-blue-600">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                 fill="currentColor">
@@ -118,7 +121,7 @@ if (Request::is('dashboard/all-posts')) {
                             </svg>
                         </a>
 
-                        <a href="{{ Request::routeIs('dashboard.all-posts.index') ?? Request::routeIs('dashboard.posts.index') ? route('dashboard.all-posts.edit',$post->slug) : route('dashboard.posts.edit',$post->slug)}}"
+                        <a href="{{ Request::routeIs('dashboard.all-posts.index') ?? Request::routeIs('dashboard.posts.index') ? route('dashboard.all-posts.edit', $post->slug) : route('dashboard.posts.edit', $post->slug) }}"
                             class="inline-flex p-1 text-xs font-bold text-white uppercase transition-colors duration-200 transform bg-yellow-500 rounded dark:bg-yellow-700 hover:bg-yellow-700 dark:hover:bg-yellow-600 focus:outline-none focus:bg-yellow-700 dark:focus:bg-yellow-600">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
                                 fill="currentColor">
@@ -126,8 +129,9 @@ if (Request::is('dashboard/all-posts')) {
                                     d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                             </svg>
                         </a>
-                        <form action="{{ Request::routeIs('dashboard.all-posts.index') ?? Request::routeIs('dashboard.posts.index') ? route('dashboard.all-posts.destroy',$post->slug) : route('dashboard.posts.destroy',$post->slug)}}" method="POST"
-                            class="inline-flex">
+                        <form
+                            action="{{ Request::routeIs('dashboard.all-posts.index') ?? Request::routeIs('dashboard.posts.index') ? route('dashboard.all-posts.destroy', $post->slug) : route('dashboard.posts.destroy', $post->slug) }}"
+                            method="POST" class="inline-flex">
                             @method('delete')
                             @csrf
                             <button
@@ -163,7 +167,7 @@ if (Request::is('dashboard/all-posts')) {
                     $('span.tooltip', $(this)).text('Click to publish');
                     $('.has-tooltip span:first-child', $(this)).html(
                         '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>'
-                        );
+                    );
 
                 } else {
                     $('button', $(this)).removeClass('bg-red-500 hover:bg-red-600').addClass(
@@ -172,7 +176,7 @@ if (Request::is('dashboard/all-posts')) {
                     $('span.tooltip', $(this)).text('Click to unpublish');
                     $('.has-tooltip span:first-child', $(this)).html(
                         '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>'
-                        );
+                    );
                 }
 
                 $.ajaxSetup({

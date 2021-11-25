@@ -26,8 +26,6 @@
 
     <title>@yield('title') | Relawan TIK Bangkalan </title>
 
-
-
 </head>
 
 <body class="bg-cyan-50 dark:bg-gray-800">

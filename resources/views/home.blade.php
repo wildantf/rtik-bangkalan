@@ -138,15 +138,20 @@
                                         class="absolute top-0 bottom-0 left-0 right-0 bg-gradient-to-b dark:via-transparent dark:from-gray-700 dark:to-gray-700">
                                     </div>
                                     <div class="absolute top-0 left-0 right-0 flex items-center justify-between mx-5 mt-3">
-                                        <a href="{{ route('posts.index') . '?category=' . $post->category->slug }}"
-                                            class="px-3 py-2 text-xs font-semibold tracking-wider uppercase dark:text-gray-100 bgundefined">{{ $post->category->name }}</a>
+                                        @isset($post->category_id)
+                                            <a href="{{ route('posts.index') . '?category=' . $post->category->slug }}"
+                                                class="px-3 py-2 text-xs font-semibold tracking-wider uppercase dark:text-gray-100 bgundefined">{{ $post->category->name }}</a>
+                                        @endisset
                                         <div class="flex flex-col justify-start text-center dark:text-gray-100">
-                                            <span class="text-3xl font-semibold leading-none tracking-wide">{{ $post->created_at->format('d') }}</span>
-                                            <span class="leading-none uppercase">{{ $post->created_at->format('M') }}</span>
+                                            <span
+                                                class="text-3xl font-semibold leading-none tracking-wide">{{ $post->created_at->format('d') }}</span>
+                                            <span
+                                                class="leading-none uppercase">{{ $post->created_at->format('M') }}</span>
                                         </div>
                                     </div>
                                     <h2 class="z-10 p-5">
-                                        <a href="{{ route('posts.show', $post->slug) }}" class="font-medium text-md hover:underline dark:text-gray-100">
+                                        <a href="{{ route('posts.show', $post->slug) }}"
+                                            class="font-medium text-md hover:underline dark:text-gray-100">
                                             {{ $post->title }}</a>
                                     </h2>
                                 </div>

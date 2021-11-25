@@ -22,7 +22,7 @@ class UserProfileRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {
+    {   
         return [
             'name' => 'required|max:255',
             'motto' =>'nullable',

@@ -10,71 +10,75 @@
         </div>
         <div class="flex flex-col" id="row-category">
             @foreach ($categories as $category)
-                <form action="/dashboard/categories/{{ $category->slug }}" method="POST">
-                    @method('put')
-                    @csrf
-                    {{-- FIXME: perbaiki error message --}}
-                    <div
-                        class="flex-col md:flex-row inline-flex w-full md:items-end bg-opacity-90 bg-{{ $category->color }}-400 rounded-lg p-3 my-1">
-                        <div class="flex-1 px-0.5 md:px-1">
-                            <label class="text-gray-900 text-sm">
-                            </label>
-                            Name
-                            <input type="text"
-                                class="w-full ring-1 rounded-lg border-transparent appearance-none border border-gray-300 py-1 px-2 bg-{{ $category->color }}-200 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                                id="name_{{ $category->id }}" name="name" value="{{ $category->name }}"
-                                onkeyup="createSlug({{ $category->id }})" required/>
-                            @error('name')
-                                <p class="flex text-sm text-red-500 -bottom-6">
-                                    {{ $message }}
-                                </p>
-                            @enderror
+                <div class="flex md:flex-row w-full bg-opacity-90 bg-{{ $category->color }}-400 rounded-lg p-3 my-1">
+                    <form action="/dashboard/categories/{{ $category->slug }}" method="POST">
+                        @method('put')
+                        @csrf
+                        <div class="flex-col md:flex-row inline-flex ">
+                            {{-- FIXME: perbaiki error message dan UI responsive --}}
+                            <div class="flex-1 px-0.5 md:px-1">
+                                <label class="text-gray-900 text-sm">
+                                </label>
+                                Name
+                                <input type="text"
+                                    class="w-full ring-1 rounded-lg border-transparent appearance-none border border-gray-300 py-1 px-2 bg-{{ $category->color }}-200 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                                    id="name_{{ $category->id }}" name="name" value="{{ $category->name }}"
+                                    onkeyup="createSlug({{ $category->id }})" required />
+                                @error('name')
+                                    <p class="flex text-sm text-red-500 -bottom-6">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
 
-                        </div>
-                        <div class="flex-1 px-0.5 md:px-1">
-                            <label class="text-gray-800 text-sm">
-                                Slug
-                            </label>
-                            <input type="text"
-                                class="w-full ring-1 rounded-lg border-transparent appearance-none border border-gray-300 py-1 px-2 bg-gray-200 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                                id="slug_{{ $category->id }}" name="slug" value="{{ $category->slug }}"
-                                oninput="showSaveBtn({{ $category->id }})" readonly required/>
-                            @error('slug')
-                                <p class="absolute text-sm text-red-500 -bottom-6">
-                                    {{ $message }}
-                                </p>
-                            @enderror
-                        </div>
-                        <div class="flex-1 px-0.5 md:px-1 ">
-                            <label class="text-gray-900 text-sm">
-                                Color
-                            </label>
-                            <input type="text"
-                                class="w-full ring-1 rounded-lg border-transparent appearance-none border border-gray-300 py-1 px-2 bg-{{ $category->color }}-200 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                                id="color_{{ $category->id }}" name="color" value="{{ $category->color }}"
-                                onkeypress="showSaveBtn({{ $category->id }})" required/>
-                            @error('color')
-                                <p class="absolute text-sm text-red-500 -bottom-6">
-                                    {{ $message }}
-                                </p>
-                            @enderror
-                        </div>
+                            </div>
+                            <div class="flex-1 px-0.5 md:px-1">
+                                <label class="text-gray-800 text-sm">
+                                    Slug
+                                </label>
+                                <input type="text"
+                                    class="w-full ring-1 rounded-lg border-transparent appearance-none border border-gray-300 py-1 px-2 bg-gray-200 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                                    id="slug_{{ $category->id }}" name="slug" value="{{ $category->slug }}"
+                                    oninput="showSaveBtn({{ $category->id }})" readonly required />
+                                @error('slug')
+                                    <p class="absolute text-sm text-red-500 -bottom-6">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
+                            </div>
+                            <div class="flex-1 px-0.5 md:px-1 ">
+                                <label class="text-gray-900 text-sm">
+                                    Color
+                                </label>
+                                <input type="text"
+                                    class="w-full ring-1 rounded-lg border-transparent appearance-none border border-gray-300 py-1 px-2 bg-{{ $category->color }}-200 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                                    id="color_{{ $category->id }}" name="color" value="{{ $category->color }}"
+                                    onkeypress="showSaveBtn({{ $category->id }})" required />
+                                @error('color')
+                                    <p class="absolute text-sm text-red-500 -bottom-6">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
+                            </div>
 
-                        <div class="px-0.5 my-2 md:my-0 md:px-1">
-                            <button id="btn_{{ $category->id }}"
-                                class="rounded-lg bg-opacity-90 bg-cyan-500 px-4 py-1 border text-white font-semibold hover:bg-cyan-700 hover:text-gray-200 disabled:opacity-50"
-                                type="submit" disabled> Update </button>
-                            <form action="dashboard/categories/{{ $category->slug }}" method="POST">
-                                @method('delete')
-                                @csrf
+                            <div class="px-0.5 my-2 md:my-0 md:px-1">
                                 <button id="btn_{{ $category->id }}"
-                                    class="rounded-lg bg-opacity-90 bg-red-500 px-4 py-1 border text-white font-semibold hover:bg-red-700 hover:text-gray-200"
-                                    type="submit"> Delete </button>
-                            </form>
+                                    class="rounded-lg bg-opacity-90 bg-cyan-500 px-4 py-1 border text-white font-semibold hover:bg-cyan-700 hover:text-gray-200 disabled:opacity-50"
+                                    type="submit" disabled> Update </button>
+                            </div>
                         </div>
+                    </form>
+                    <div class="flex">
 
+                        <form action="{{ route('dashboard.categories.destroy', $category->slug) }}" method="POST">
+                            @method('delete')
+                            @csrf
+                            <button id="btn_{{ $category->id }}"
+                                class="rounded-lg bg-opacity-90 bg-red-500 px-4 py-1 border text-white font-semibold hover:bg-red-700 hover:text-gray-200"
+                                type="submit"> Delete </button>
+                        </form>
                     </div>
-                </form>
+                </div>
+
             @endforeach
 
             {{-- FORM NEW CATEGORY --}}
@@ -88,7 +92,7 @@
                         <input type="text"
                             class="w-full ring-1 rounded-lg border-transparent appearance-none border border-gray-300 py-1 px-2 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                             name="name" id="name_new_store" value="{{ old('name') }}"
-                            onkeypress="createSlug('new_store')" required/>
+                            onkeypress="createSlug('new_store')" required />
                         @error('name')
                             <p class="flex text-sm text-red-500 -bottom-6">
                                 {{ $message }}
@@ -101,7 +105,7 @@
                         </label>
                         <input type="text"
                             class="w-full ring-1 rounded-lg border-transparent appearance-none border border-gray-300 py-1 px-2 bg-gray-200 text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                            name="slug" id="slug_new_store" value="{{ old('slug') }}" readonly required/>
+                            name="slug" id="slug_new_store" value="{{ old('slug') }}" readonly required />
                         @error('slug')
                             <p class="absolute text-sm text-red-500 -bottom-6">
                                 {{ $message }}
@@ -114,7 +118,7 @@
                         </label>
                         <input type="text"
                             class="w-full ring-1 rounded-lg border-transparent appearance-none border border-gray-300 py-1 px-2 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                            name="color" value="{{ old('color') }}" required/>
+                            name="color" value="{{ old('color') }}" required />
                         @error('color')
                             <p class="absolute text-sm text-red-500 -bottom-6">
                                 {{ $message }}
