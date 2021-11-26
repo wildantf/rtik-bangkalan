@@ -116,12 +116,3 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')
 Route::resource('/profiles', UserProfileController::class)->middleware(['auth', 'verified'])->only(['edit', 'show', 'update']);
     // });
 
-
-// Route::get('/categories/{category:slug}',function(Category $category){
-//     return view('posts', [
-//         'title'=> "Post By Category : $category->name",
-//         'active'=> 'Categories',
-//         'posts'=> $category->posts->load('category','author'),
-//     ]);
-
-// });

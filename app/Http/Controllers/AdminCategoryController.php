@@ -18,7 +18,7 @@ class AdminCategoryController extends Controller
     }
 
     public function store(CategoryRequest $request)
-    {
+    {   
         Category::create($request->validated());
         return back()->with('success', 'New Category success added!');
     }

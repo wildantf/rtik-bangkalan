@@ -63,7 +63,6 @@
                                 <span id="text-upload">
                                     Upload Image
                                 </span>
-                                <input type="hidden" value="{{ $post->image }}" name="oldImage">
                                 <input type="file" name="image" id="image" class="hidden" onchange="imgPreview()"
                                     accept="image/x-png,image/gif,image/jpeg">
                                 @error('image')

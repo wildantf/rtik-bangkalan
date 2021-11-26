@@ -84,13 +84,13 @@
                         <p>{{ $user->position->name }}</p>
                     </div>
                     <div class="flex items-center justify-center p-3 space-x-3 border-t dark:text-gray-300">
-                        <a href="{{ $user->email }}" title="Email" class="dark:hover:text-cyan-400">
+                        {{-- <a href="{{ $user->email }}" title="Email" class="dark:hover:text-cyan-400">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                                 class="w-5 h-5">
                                 <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
                                 <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
                             </svg>
-                        </a>
+                        </a> --}}
                         @if (isset($user->twitter_url))
                             <a href="https://twitter.com/{{ $user->twitter_url }}" title="Twitter"
                                 class="dark:hover:text-cyan-400">

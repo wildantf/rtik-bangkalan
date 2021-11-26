@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
+use App\Http\Requests\PostRequest;
 use Illuminate\Support\Facades\Storage;
-
 
 
 class DashboardPostController extends Controller
@@ -29,31 +29,24 @@ class DashboardPostController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        $validateData = $request->validate([
-            "title" => 'required|max:255',
-            'slug' => 'required|unique:posts',
-            'image' => 'image|file|max:1024',
-            'category_id' => 'required',
-            'body' => 'required|min:300',
-        ]);
+        $validatedData = $request->validated();
 
         if ($request->file('image')) {
-            $validateData['image'] = $request->file('image')->store('post-images');
+            $validatedData['image'] = $request->file('image')->store('post-images');
         }
-        $validateData['user_id'] = auth()->user()->id;
-        $validateData['excerpt'] = Str::limit(strip_tags($request->body), 200);
+        $validatedData['user_id'] = auth()->user()->id;
+        $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200);
 
-        Post::create($validateData);
+        Post::create($validatedData);
 
-        return redirect('/dashboard/posts')->with('success', [$validateData['title'], ' has been added!']);
+        return redirect('/dashboard/posts')->with('success', [$validatedData['title'], ' has been added!']);
     }
 
 
     public function show(Post $post)
     {
-        // dd($post);
         return view('dashboard.posts.show', [
             'post' => $post,
         ]);
@@ -62,55 +55,63 @@ class DashboardPostController extends Controller
 
     public function edit(Post $post)
     {
-        if (auth()->user()->id === $post->user_id) {
-            return view('dashboard.posts.edit', [
-                'post' => $post,
-                'categories' => Category::all(),
-            ]);
-        } else {
-            abort(500);
-        }
+        // control access
+        
+        $this->access_control($post);
+
+        return view('dashboard.posts.edit', [
+            'post' => $post,
+            'categories' => Category::all(),
+        ]);
     }
 
 
-    public function update(Request $request, Post $post)
+    public function update(PostRequest $request, Post $post)
     {
+        dd($request->route());
+        // control access
+        $this->access_control($post);
+
         $post_title = $request->title;
+        // validasi data
+        $validatedData = $request->validated();
 
-        $rules = [
-            "title" => 'required|max:255',
-            'category_id' => 'required',
-            'image' => 'image|file|max:1024',
-            'body' => 'required',
-        ];
+        // otomasi create data excerpt
+        $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200);
 
-        if ($request->slug != $post->slug) {
-            $rules['slug'] = 'required|unique:posts';
-        }
-
-        $validateData = $request->validate($rules);
-
-
-        $validateData['excerpt'] = Str::limit(strip_tags($request->body), 200);
         if ($request->file('image')) {
-            Storage::delete($request->oldImage);
-            $validateData['image'] = $request->file('image')->store('post-images');
+            Storage::delete($post->image);
+            $validatedData['image'] = $request->file('image')->store('post-images');
         }
-        $post->update($validateData);
 
-        return redirect('/dashboard/posts')->with('success', [$post_title, ' has been edited!']);
+        $post->update($validatedData);
+        return redirect(route('dashboard.posts.index'))->with('success', [$post_title, ' has been edited!']);
     }
 
 
     public function destroy(Post $post)
     {
         $post_title = $post->title;
+
+        // control access
+        $this->access_control($post);
+
+        // delete image post
         if ($post->image) {
             Storage::delete($post->image);
         }
-
         Post::destroy($post->id);
 
-        return redirect('/dashboard/posts')->with('warning', [$post_title, ' has been deleted!']);
+        return redirect(route('dashboard.posts.index'))->with('warning', [$post_title, ' has been deleted!']);
+    }
+
+    // FIXME : Jadikan middleware
+    private function access_control($model)
+    {
+        //get user object
+        $user = User::find(auth()->user()->id);
+
+        // control access
+        return abort_unless($user->id === $model->user_id || $user->hasAnyRole(['admin', 'super-admin']), 500);
     }
 }

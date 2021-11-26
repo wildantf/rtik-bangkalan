@@ -44,7 +44,7 @@ class UserProfileController extends Controller
     public function edit(User $profile)
     {
         // abort respone jika bukan user
-        abort_if(auth()->user()->username !== $profile->username, 403,'Anda mau kemana hey');
+        abort_if(auth()->user()->username !== $profile->username, 403, 'Anda mau kemana hey');
 
         return view('users.profile.edit', [
             "user" => $profile,
@@ -55,7 +55,8 @@ class UserProfileController extends Controller
     public function update(UserProfileRequest $request, User $profile)
     {
         // dd($user->username);
-        // TODO : HAK AKSES
+        // FIXME : Ubah ketika edit member page dibuat
+        abort_if(auth()->user()->username !== $profile->username, 403, 'Anda mau kemana hey');
         $validatedData = $request->validated();
 
         if ($request->file('photo_profile')) {
@@ -70,5 +71,8 @@ class UserProfileController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+    private function access_control($model){
+
     }
 }

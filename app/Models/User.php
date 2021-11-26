@@ -53,8 +53,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     // Merubah route key name yang sebelumnya  
-    public function getRouteKeyName()
-    {
+    public function getRouteKeyName(){
         return 'username';
     }
 
