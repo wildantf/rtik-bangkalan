@@ -9,12 +9,9 @@ use App\Http\Requests\UserProfileRequest;
 
 class UserProfileController extends Controller
 {
-
     public function index()
     {
-        // return view('dashboard.categories.test',[
-        //     'users'=> User::all(),
-        // ]);
+
     }
 
     public function create()
@@ -27,12 +24,6 @@ class UserProfileController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
     public function show(User $profile)
     {
         // dd($profile);
@@ -44,19 +35,16 @@ class UserProfileController extends Controller
     public function edit(User $profile)
     {
         // abort respone jika bukan user
-        abort_if(auth()->user()->username !== $profile->username, 403, 'Anda mau kemana hey');
 
         return view('users.profile.edit', [
             "user" => $profile,
         ]);
     }
 
-
     public function update(UserProfileRequest $request, User $profile)
     {
         // dd($user->username);
         // FIXME : Ubah ketika edit member page dibuat
-        abort_if(auth()->user()->username !== $profile->username, 403, 'Anda mau kemana hey');
         $validatedData = $request->validated();
 
         if ($request->file('photo_profile')) {
@@ -71,8 +59,5 @@ class UserProfileController extends Controller
     public function destroy(User $user)
     {
         //
-    }
-    private function access_control($model){
-
     }
 }

@@ -9,6 +9,13 @@ use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class AdminCategoryController extends Controller
 {
+    public function __construct()
+    {
+        // middlware untuk semua method
+        $this->middleware('permission:create category');
+        // middleware hanya untuk update
+        $this->middleware('permission:update category', ['only' => 'update']);
+    }
 
     public function index()
     {
@@ -18,7 +25,7 @@ class AdminCategoryController extends Controller
     }
 
     public function store(CategoryRequest $request)
-    {   
+    {
         Category::create($request->validated());
         return back()->with('success', 'New Category success added!');
     }
@@ -26,7 +33,7 @@ class AdminCategoryController extends Controller
     public function update(CategoryRequest $request, Category $category)
     {
         $category->update($request->validated());
-        return redirect('dashboard/categories')->with('success', 'Category has updated!');
+        return redirect(route('dashboard.categories.index'))->with('success', 'Category has updated!');
     }
 
     public function destroy(Category $category)

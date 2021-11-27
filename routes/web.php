@@ -94,7 +94,7 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')
         return view('dashboard.index', [
             'users' => User::with('roles')->get(),
         ]);
-    });
+    })->name('index');
 
     // resource untuk posts
     Route::resource('/posts', DashboardPostController::class);
@@ -104,15 +104,14 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')
     Route::get('/check-category-slug', [SlugController::class, 'checkCategorySlug'])->name('category.slug');
 
     // ADMINISTRATOR
-    Route::resource('/all-posts', AdminPostController::class)->except(['create', 'store'])->middleware(['permission:validation articles']);
+    Route::get('/all-posts', [AdminPostController::class, 'index'])->name('all-posts.index')->middleware('permission:validation posts');
     // set publish post status
-    Route::put('/publish/{post:slug}', [AdminPostController::class, 'updatePublishStatus'])->name('post.publish');
+    Route::put('/publish/{post:slug}', [AdminPostController::class, 'updatePublishStatus'])->name('post.publish')->middleware('role:admin|super-admin');
     // Categories
-    Route::resource('/categories', AdminCategoryController::class)->except(['edit', 'show', 'create'])->middleware(['permission:create category']);
+    Route::resource('/categories', AdminCategoryController::class)->except(['edit', 'show', 'create']);
 });
 
 // Profile
-// Route::middleware(['auth','verified'])->prefix('profile')->group(function(){
-Route::resource('/profiles', UserProfileController::class)->middleware(['auth', 'verified'])->only(['edit', 'show', 'update']);
-    // });
-
+Route::middleware(['auth', 'verified', 'is_own_profile'])->group(function () {
+    Route::resource('/profiles', UserProfileController::class)->only(['edit', 'show', 'update']);
+});

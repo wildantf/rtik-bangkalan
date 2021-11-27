@@ -60,6 +60,7 @@
                                 @enderror
                             </div>
 
+                            <!-- TODO : Kelompokkan button update dan delete agar bisa dicluster pada middlware update category -->
                             <div class="px-0.5 my-2 md:my-0 md:px-1">
                                 <button id="btn_{{ $category->id }}"
                                     class="rounded-lg bg-opacity-90 bg-cyan-500 px-4 py-1 border text-white font-semibold hover:bg-cyan-700 hover:text-gray-200 disabled:opacity-50"
@@ -68,6 +69,7 @@
                         </div>
                     </form>
                     <div class="flex">
+
 
                         <form action="{{ route('dashboard.categories.destroy', $category->slug) }}" method="POST">
                             @method('delete')

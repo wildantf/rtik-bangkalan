@@ -148,7 +148,7 @@
                     <thead class="text-center bg-cyan-200 dark:bg-cyan-800 dark:text-gray-200">
                         <tr>
                             <th class="px-3 py-2">User</th>
-                            <th class="px-3 py-2">Contact</th>
+                            {{-- <th class="px-3 py-2">Contact</th> --}}
                             <th class="px-3 py-2">Join Date</th>
                             <th class="px-3 py-2">Role</th>
                         </tr>
@@ -159,7 +159,7 @@
 
                             <tr>
                                 <td class="px-3 py-3">{{ $user->name }}</td>
-                                <td class="px-3 py-3">{{ $user->email }}</td>
+                                {{-- <td class="px-3 py-3">{{ $user->email }}</td> --}}
                                 <td class="px-3 py-3 text-center">{{ $user->created_at->format('d/M/Y') }}</td>
                                 <td class="px-3 py-3 text-center">
                                     <span

@@ -2,10 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\Providers\AppServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 
-class IsAdmin
+class EnsureOwnProfile
 {
     /**
      * Handle an incoming request.
@@ -16,10 +17,14 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!auth()->check() || !auth()->user()->is_admin){
-            abort(403);
-        }
+        // get user model
+        // dd($request->route());
+        $user = $request->route()->parameter('profile');
 
+
+        if ($user->username !== auth()->user()->username) {
+            return abort(403, 'Anda mau kemana heyyy');
+        }
         return $next($request);
     }
 }

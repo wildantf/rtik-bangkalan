@@ -3,15 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use App\Http\Requests\PostRequest;
+use App\Http\Traits\ControlAccessTrait;
 use Illuminate\Support\Facades\Storage;
 
 
 class DashboardPostController extends Controller
 {
+    public function __construct()
+    {
+        // middleware mengecek author post, atau memiliki hak akses untuk edit,delete,update,show 
+        $this->middleware('is_author')->except(['index', 'create', 'store']);
+    }
+
     public function index()
     {
         return view('dashboard.posts.index', [
@@ -41,7 +47,7 @@ class DashboardPostController extends Controller
 
         Post::create($validatedData);
 
-        return redirect('/dashboard/posts')->with('success', [$validatedData['title'], ' has been added!']);
+        return redirect(route('dashboard.posts.index'))->with('success', [$validatedData['title'], ' has been added!']);
     }
 
 
@@ -55,10 +61,6 @@ class DashboardPostController extends Controller
 
     public function edit(Post $post)
     {
-        // control access
-        
-        $this->access_control($post);
-
         return view('dashboard.posts.edit', [
             'post' => $post,
             'categories' => Category::all(),
@@ -68,9 +70,7 @@ class DashboardPostController extends Controller
 
     public function update(PostRequest $request, Post $post)
     {
-        dd($request->route());
-        // control access
-        $this->access_control($post);
+        // dd($request->route());
 
         $post_title = $request->title;
         // validasi data
@@ -93,25 +93,12 @@ class DashboardPostController extends Controller
     {
         $post_title = $post->title;
 
-        // control access
-        $this->access_control($post);
-
         // delete image post
         if ($post->image) {
             Storage::delete($post->image);
         }
-        Post::destroy($post->id);
+        $post->delete();
 
         return redirect(route('dashboard.posts.index'))->with('warning', [$post_title, ' has been deleted!']);
-    }
-
-    // FIXME : Jadikan middleware
-    private function access_control($model)
-    {
-        //get user object
-        $user = User::find(auth()->user()->id);
-
-        // control access
-        return abort_unless($user->id === $model->user_id || $user->hasAnyRole(['admin', 'super-admin']), 500);
     }
 }
